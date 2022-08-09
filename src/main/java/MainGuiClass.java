@@ -68,7 +68,7 @@ public class MainGuiClass implements ActionListener {
 
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
-        //mainFrame.add(textPanel);
+        mainFrame.add(textPanel);
         mainFrame.setSize(300, 500);
         //mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
