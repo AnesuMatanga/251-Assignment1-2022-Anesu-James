@@ -1,3 +1,4 @@
+
 /**
  * This MainGuiClass is a class that creates the GUI and interacts with other
  * classes with functions to make the text editor act a certain way
@@ -72,7 +73,6 @@ public class MainGuiClass implements ActionListener {
         //mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
-    }
 
     //If a menu Item has been selected
     public void actionPerformed(ActionEvent e){
