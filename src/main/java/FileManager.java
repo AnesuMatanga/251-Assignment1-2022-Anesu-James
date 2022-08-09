@@ -41,7 +41,7 @@ public class FileManager {
      */
     public void open() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showSaveDialog(textComponent);
+        fileChooser.showOpenDialog(textComponent);
         currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
         File fileToOpen = new File (currentFilePath);
 
