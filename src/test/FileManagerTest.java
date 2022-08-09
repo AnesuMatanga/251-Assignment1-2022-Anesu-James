@@ -20,4 +20,12 @@ class FileManagerTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void open() {
+        JTextArea textComponent = new JTextArea();
+        FileManager manager = new FileManager(textComponent);
+        manager.open();
+        System.out.println(textComponent.getText());
+    }
 }

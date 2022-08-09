@@ -36,6 +36,25 @@ public class FileManager {
         }
     }
 
+    /**
+     * Opens the file at currentFilePath and loads it in the textComponent
+     */
+    public void open() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showSaveDialog(textComponent);
+        currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        File fileToOpen = new File (currentFilePath);
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
+            textComponent.read(bufferedReader, null);
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public String getCurrentFilePath() {
         return currentFilePath;
     }
