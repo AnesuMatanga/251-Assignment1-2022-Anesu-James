@@ -1,4 +1,3 @@
-
 /**
  * This MainGuiClass is a class that creates the GUI and interacts with other
  * classes with functions to make the text editor act a certain way
