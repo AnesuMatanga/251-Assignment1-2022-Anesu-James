@@ -73,7 +73,7 @@ public class MainGuiClass implements ActionListener {
         //mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
-
+    }
     //If a menu Item has been selected
     public void actionPerformed(ActionEvent e){
         String selected = e.getActionCommand();
