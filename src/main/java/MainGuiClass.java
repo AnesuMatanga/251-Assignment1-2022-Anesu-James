@@ -28,17 +28,13 @@ public class MainGuiClass implements ActionListener {
         try {
             //Java L&F cross-platform look
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
 
-        }
-        catch (IllegalAccessException e){
+        } catch (IllegalAccessException e) {
 
-        }
-        catch (UnsupportedLookAndFeelException e){
+        } catch (UnsupportedLookAndFeelException e) {
 
-        }
-        catch (InstantiationException e){
+        } catch (InstantiationException e) {
 
         }
 
@@ -68,28 +64,25 @@ public class MainGuiClass implements ActionListener {
 
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
-        //mainFrame.add(textPanel);
+        mainFrame.add(textPanel);
         mainFrame.setSize(300, 500);
         //mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
-
-    //If a menu Item has been selected
-    public void actionPerformed(ActionEvent e){
-        String selected = e.getActionCommand();
-
-        //If else statements to give commands for different menu item selections
-        if(selected.equals("New")){
-            //Call the FileManager Class
-        }
-        else if(selected.equals("Open")){
-            //Call the FileManager Class
-        }
-        else if(selected.equals("Save")){
-            //Call the FileManager Class
-        }
     }
+        //If a menu Item has been selected
+        public void actionPerformed (ActionEvent e){
+            String selected = e.getActionCommand();
 
+            //If else statements to give commands for different menu item selections
+            if (selected.equals("New")) {
+                //Call the FileManager Class
+            } else if (selected.equals("Open")) {
+                //Call the FileManager Class
+            } else if (selected.equals("Save")) {
+                //Call the FileManager Class
+            }
+        }
 }
 
 
