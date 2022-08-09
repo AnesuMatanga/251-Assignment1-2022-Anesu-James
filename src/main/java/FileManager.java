@@ -54,6 +54,13 @@ public class FileManager {
         }
     }
 
+    /**
+     * Clears the text area and puts the fileManager into a clean state.
+     */
+    public void newFile() {
+        currentFilePath = null;
+        textComponent.setText(null);
+    }
 
     public String getCurrentFilePath() {
         return currentFilePath;

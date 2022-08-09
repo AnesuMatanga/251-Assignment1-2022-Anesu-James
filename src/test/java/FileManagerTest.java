@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class FileManagerTest {
 
     @org.junit.jupiter.api.Test
@@ -21,11 +23,19 @@ class FileManagerTest {
         }
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void open() {
         JTextArea textComponent = new JTextArea();
         FileManager manager = new FileManager(textComponent);
         manager.open();
         System.out.println(textComponent.getText());
+    }
+
+    @org.junit.jupiter.api.Test
+    void newFile() {
+        JTextArea textComponent = new JTextArea("This text area has some text");
+        FileManager manager = new FileManager(textComponent);
+        manager.newFile();
+        assertEquals("", textComponent.getText());
     }
 }
