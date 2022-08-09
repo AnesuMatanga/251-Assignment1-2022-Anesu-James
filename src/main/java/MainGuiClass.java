@@ -18,6 +18,8 @@ public class MainGuiClass implements ActionListener {
     static JMenuItem newItem, openItem, saveItem;
     static JTextArea mainTextArea;
 
+    private FileManager fileManger;
+
     //Constructor
     MainGuiClass() {
         //Creating Objects for the GUI
@@ -44,6 +46,8 @@ public class MainGuiClass implements ActionListener {
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
         saveItem = new JMenuItem("Save");
+
+        fileManger = new FileManager(mainTextArea);
 
         //Adding the mainTextArea to the textPanel
         textPanel.add(mainTextArea);
@@ -76,16 +80,15 @@ public class MainGuiClass implements ActionListener {
 
         //If else statements to give commands for different menu item selections
         if(selected.equals("New")){
-            //Call the FileManager Class
+            fileManger.newFile();
         }
         else if(selected.equals("Open")){
-            //Call the FileManager Class
+            fileManger.open();
         }
         else if(selected.equals("Save")){
-            //Call the FileManager Class
+            fileManger.save();
         }
     }
-
 }
 
 
