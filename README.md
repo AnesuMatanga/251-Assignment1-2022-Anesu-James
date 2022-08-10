@@ -1,5 +1,8 @@
 # 251-Assignment1-2022-Anesu-James
 
+Assignment instructions:
+https://docs.google.com/document/d/1ExnczLvmRJI_EWigVCtNfRxBAHnZEHmjPberbcjkSrc/edit
+
 UML planning document
 https://app.diagrams.net/#G1ycXvWrNYjXnUeeL5U54cfaqtOqOF19WM
 
