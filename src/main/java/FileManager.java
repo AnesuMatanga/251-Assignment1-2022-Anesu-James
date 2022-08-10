@@ -23,7 +23,8 @@ public class FileManager {
         File fileToSave;
         if (currentFilePath == null) {
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.showSaveDialog(textComponent);
+            int fileChooserResult = fileChooser.showSaveDialog(textComponent);
+            if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
         }
         fileToSave = new File(currentFilePath);
@@ -41,16 +42,17 @@ public class FileManager {
      */
     public void open() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showOpenDialog(textComponent);
-        currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-        File fileToOpen = new File (currentFilePath);
-
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
-            textComponent.read(bufferedReader, null);
-            bufferedReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        int fileChooserResult = fileChooser.showOpenDialog(textComponent);
+        if (fileChooserResult == JFileChooser.APPROVE_OPTION) {
+            currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+            File fileToOpen = new File (currentFilePath);
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
+                textComponent.read(bufferedReader, null);
+                bufferedReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
