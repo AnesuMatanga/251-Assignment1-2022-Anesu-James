@@ -25,6 +25,7 @@ public class MainGuiClass extends JFrame implements ActionListener {
 
 
     private FileManager fileManger;
+    private EditorManager editorManager;
 
     //Constructor
     MainGuiClass() {
@@ -72,6 +73,7 @@ public class MainGuiClass extends JFrame implements ActionListener {
         scrollPane = new JScrollPane(mainTextArea);
 
         fileManger = new FileManager(mainTextArea);
+        editorManager = new EditorManager(mainTextArea);
 
         //Adding the mainTextArea to the textPanel
         //textPanel.add(mainTextArea);
@@ -102,10 +104,10 @@ public class MainGuiClass extends JFrame implements ActionListener {
         fileMenu.addActionListener(this);
 
         //Adding ActionListeners to Edit Menu Items
-        cutEditItem.addActionListener(this);
-        copyEditItem.addActionListener(this);
-        pasteEditItem.addActionListener(this);
-        deleteEditItem.addActionListener(this);
+        cutEditItem.addActionListener(e -> editorManager.cut());
+        copyEditItem.addActionListener(e -> editorManager.copy());
+        pasteEditItem.addActionListener(e -> editorManager.paste());
+        deleteEditItem.addActionListener(e -> editorManager.delete());
 
         //Adding ActionListener to JButton and TextField to search
         searchButton.addActionListener(this);
