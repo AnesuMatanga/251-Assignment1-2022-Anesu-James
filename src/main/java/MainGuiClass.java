@@ -6,17 +6,23 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.*;
 
 
-public class MainGuiClass implements ActionListener {
+public class MainGuiClass extends JFrame implements ActionListener {
     //Initialising Fields
     static JFrame mainFrame;
-    static JPanel menuPanel;
     static JPanel textPanel;
     static JMenuBar menuBar;
-    static JMenu menu;
-    static JMenuItem newItem, openItem, saveItem;
-    static JTextArea mainTextArea;
+    static JMenu fileMenu, editMenu, themeMenu;
+    static JMenuItem newItem, openItem, saveItem, exitItem,cutEditItem, copyEditItem,
+            pasteEditItem, deleteEditItem;
+    static JEditorPane mainTextArea;
+    static JScrollPane scrollPane;
+    static JCheckBoxMenuItem darkModeItem, lightModeItem;
+    static JButton searchButton;
+    static JTextField searchTextField;
+
 
     private FileManager fileManger;
 
@@ -25,54 +31,97 @@ public class MainGuiClass implements ActionListener {
         //Creating Objects for the GUI
 
         mainFrame = new JFrame("Text Editor");
+
         //Setting the look and feel of the Main Window to Java L&F
         try {
-            //Java L&F cross-platform look
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+           Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (ClassNotFoundException e) {
 
-        }
-        catch (IllegalAccessException e){
-
-        }
-        catch (UnsupportedLookAndFeelException e){
-
-        }
-        catch (InstantiationException e){
-
-        }
-
+        //Creating GUI Objects
         textPanel = new JPanel();
         menuBar = new JMenuBar();
-        menu = new JMenu("File");
-        mainTextArea = new JTextArea();
+        fileMenu = new JMenu("File");
+        editMenu = new JMenu("Edit");
+        themeMenu = new JMenu("Theme");
+        darkModeItem = new JCheckBoxMenuItem("Dark Mode");
+        lightModeItem = new JCheckBoxMenuItem("Light Mode");
+        mainTextArea = new JEditorPane();
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
         saveItem = new JMenuItem("Save");
+        exitItem = new JMenuItem("Exit");
+        cutEditItem = new JMenuItem("Cut");
+        copyEditItem = new JMenuItem("Copy");
+        pasteEditItem = new JMenuItem("Paste");
+        deleteEditItem = new JMenuItem("Delete");
+        searchButton = new JButton("Search");
+        searchTextField = new JTextField();
+        scrollPane = new JScrollPane(mainTextArea);
 
         fileManger = new FileManager(mainTextArea);
 
         //Adding the mainTextArea to the textPanel
-        textPanel.add(mainTextArea);
+        //textPanel.add(mainTextArea);
 
         //Adding menu Items to menu
-        menu.add(newItem);
-        menu.add(openItem);
-        menu.add(saveItem);
+        fileMenu.add(newItem);
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        fileMenu.add(exitItem);
+
+        //Adding Edit menu Items to Edit Menu
+        editMenu.add(cutEditItem);
+        editMenu.add(copyEditItem);
+        editMenu.add(pasteEditItem);
+        editMenu.add(deleteEditItem);
+
+        //Adding Theme menu Items to Theme Menu
+        darkModeItem.setSelected(false);
+        themeMenu.add(darkModeItem);
+
+        lightModeItem.setSelected(true);
+        themeMenu.add(lightModeItem);
 
         //Adding ActionListeners to the Menu Items
         newItem.addActionListener(this);
         openItem.addActionListener(this);
         saveItem.addActionListener(this);
+        fileMenu.addActionListener(this);
+
+        //Adding ActionListeners to Edit Menu Items
+        cutEditItem.addActionListener(this);
+        copyEditItem.addActionListener(this);
+        pasteEditItem.addActionListener(this);
+        deleteEditItem.addActionListener(this);
+
+        //Adding ActionListener to JButton and TextField to search
+        searchButton.addActionListener(this);
+        searchTextField.addActionListener(this);
 
         //Adding the menu to the menuBar
-        menuBar.add(menu);
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        menuBar.add(themeMenu);
+        menuBar.add(searchTextField);
+        menuBar.add(searchButton);
 
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
-        mainFrame.add(textPanel);
-        mainFrame.setSize(300, 500);
+        mainFrame.add(scrollPane);
+        mainFrame.setSize(600, 600);
         //mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
@@ -93,14 +142,6 @@ public class MainGuiClass implements ActionListener {
         }
     }
 }
-
-
-
-
-
-
-
-
 
 
 
