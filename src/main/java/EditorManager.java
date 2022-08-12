@@ -45,6 +45,7 @@ public class EditorManager {
         int caretPosition = textComponent.getCaretPosition();
         String newText = new StringBuilder(textComponent.getText()).insert(caretPosition, clipboardContent).toString();
         textComponent.setText(newText);
+        textComponent.setCaretPosition(caretPosition + clipboardContent.length());
     }
 
     /**
