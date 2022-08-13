@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.logging.*;
 
 
-public class MainGuiClass extends JFrame implements ActionListener {
+public class MainGuiClass extends JFrame {
     //Initialising Fields
     static JFrame mainFrame;
     static JPanel textPanel;
@@ -17,7 +17,7 @@ public class MainGuiClass extends JFrame implements ActionListener {
     static JMenu fileMenu, editMenu, themeMenu;
     static JMenuItem newItem, openItem, saveItem, exitItem,cutEditItem, copyEditItem,
             pasteEditItem, deleteEditItem;
-    static JEditorPane mainTextArea;
+    static JTextArea mainTextArea;
     static JScrollPane scrollPane;
     static JCheckBoxMenuItem darkModeItem, lightModeItem;
     static JButton searchButton;
@@ -26,6 +26,7 @@ public class MainGuiClass extends JFrame implements ActionListener {
 
     private FileManager fileManger;
     private EditorManager editorManager;
+    private SearchBoxManager searchBoxManager;
 
     //Constructor
     MainGuiClass() {
@@ -59,7 +60,7 @@ public class MainGuiClass extends JFrame implements ActionListener {
         themeMenu = new JMenu("Theme");
         darkModeItem = new JCheckBoxMenuItem("Dark Mode");
         lightModeItem = new JCheckBoxMenuItem("Light Mode");
-        mainTextArea = new JEditorPane();
+        mainTextArea = new JTextArea();
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
         saveItem = new JMenuItem("Save");
@@ -74,6 +75,7 @@ public class MainGuiClass extends JFrame implements ActionListener {
 
         fileManger = new FileManager(mainTextArea);
         editorManager = new EditorManager(mainTextArea);
+        searchBoxManager = new SearchBoxManager(mainTextArea);
 
         //Adding the mainTextArea to the textPanel
         //textPanel.add(mainTextArea);
@@ -97,11 +99,13 @@ public class MainGuiClass extends JFrame implements ActionListener {
         lightModeItem.setSelected(true);
         themeMenu.add(lightModeItem);
 
-        //Adding ActionListeners to the Menu Items
-        newItem.addActionListener(this);
-        openItem.addActionListener(this);
-        saveItem.addActionListener(this);
-        fileMenu.addActionListener(this);
+        //Adding ActionListeners to the Menu Items (lambda expression)
+        newItem.addActionListener(e -> fileManger.newFile());
+        openItem.addActionListener(e -> fileManger.open());
+        saveItem.addActionListener(e -> fileManger.save());
+        //exitItem.addActionListener(e -> fileManger.exit());
+        //fileMenu.addActionListener(this);
+
 
         //Adding ActionListeners to Edit Menu Items
         cutEditItem.addActionListener(e -> editorManager.cut());
@@ -110,8 +114,12 @@ public class MainGuiClass extends JFrame implements ActionListener {
         deleteEditItem.addActionListener(e -> editorManager.delete());
 
         //Adding ActionListener to JButton and TextField to search
-        searchButton.addActionListener(this);
-        searchTextField.addActionListener(this);
+        //searchButton.addActionListener(this);
+        //searchTextField.addActionListener(this);
+
+        //Adding DocumentListener and ActionListener to JTextField
+        searchTextField.getDocument().addDocumentListener(searchBoxManager);
+        searchTextField.addActionListener(searchBoxManager);
 
         //Adding the menu to the menuBar
         menuBar.add(fileMenu);
@@ -129,7 +137,7 @@ public class MainGuiClass extends JFrame implements ActionListener {
         mainFrame.setVisible(true);
     }
     //If a menu Item has been selected
-    public void actionPerformed(ActionEvent e){
+ /**   public void actionPerformed(ActionEvent e){
         String selected = e.getActionCommand();
 
         //If else statements to give commands for different menu item selections
@@ -142,7 +150,7 @@ public class MainGuiClass extends JFrame implements ActionListener {
         else if(selected.equals("Save")){
             fileManger.save();
         }
-    }
+    } **/
 }
 
 
