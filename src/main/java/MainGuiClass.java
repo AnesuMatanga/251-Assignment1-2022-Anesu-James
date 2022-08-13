@@ -21,6 +21,7 @@ public class MainGuiClass extends JFrame {
     static JScrollPane scrollPane;
     static JCheckBoxMenuItem darkModeItem, lightModeItem;
     static JButton searchButton;
+    static JButton aboutButton;
     static JTextField searchTextField;
 
 
@@ -70,6 +71,7 @@ public class MainGuiClass extends JFrame {
         pasteEditItem = new JMenuItem("Paste");
         deleteEditItem = new JMenuItem("Delete");
         searchButton = new JButton("Search");
+        aboutButton = new JButton("About");
         searchTextField = new JTextField();
         scrollPane = new JScrollPane(mainTextArea);
 
@@ -117,6 +119,13 @@ public class MainGuiClass extends JFrame {
         //searchButton.addActionListener(this);
         //searchTextField.addActionListener(this);
 
+        aboutButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
+                    "Made by Anesu and James for assignment 1 of 159251 Semester 2 2022.\n" +
+                    "Search feature: Just start typing and it will search the current document for that text." +
+                    " Pressing Enter will cycle through the found occurrences of the search string.\n");
+        });
+
         //Adding DocumentListener and ActionListener to JTextField
         searchTextField.getDocument().addDocumentListener(searchBoxManager);
         searchTextField.addActionListener(searchBoxManager);
@@ -127,6 +136,7 @@ public class MainGuiClass extends JFrame {
         menuBar.add(themeMenu);
         menuBar.add(searchTextField);
         menuBar.add(searchButton);
+        menuBar.add(aboutButton);
 
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
