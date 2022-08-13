@@ -20,7 +20,7 @@ public class MainGuiClass extends JFrame {
     static JTextArea mainTextArea;
     static JScrollPane scrollPane;
     static JCheckBoxMenuItem darkModeItem, lightModeItem;
-    static JButton searchButton;
+    static JButton dateAndTimeButton;
     static JTextField searchTextField;
 
 
@@ -69,7 +69,7 @@ public class MainGuiClass extends JFrame {
         copyEditItem = new JMenuItem("Copy");
         pasteEditItem = new JMenuItem("Paste");
         deleteEditItem = new JMenuItem("Delete");
-        searchButton = new JButton("Search");
+        dateAndTimeButton = new JButton("Add Date & Time");
         searchTextField = new JTextField();
         scrollPane = new JScrollPane(mainTextArea);
 
@@ -113,9 +113,8 @@ public class MainGuiClass extends JFrame {
         pasteEditItem.addActionListener(e -> editorManager.paste());
         deleteEditItem.addActionListener(e -> editorManager.delete());
 
-        //Adding ActionListener to JButton and TextField to search
-        //searchButton.addActionListener(this);
-        //searchTextField.addActionListener(this);
+        //Adding ActionListener to date and time button
+        dateAndTimeButton.addActionListener(e -> editorManager.addDateAndTime());
 
         //Adding DocumentListener and ActionListener to JTextField
         searchTextField.getDocument().addDocumentListener(searchBoxManager);
@@ -126,7 +125,7 @@ public class MainGuiClass extends JFrame {
         menuBar.add(editMenu);
         menuBar.add(themeMenu);
         menuBar.add(searchTextField);
-        menuBar.add(searchButton);
+        menuBar.add(dateAndTimeButton);
 
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
