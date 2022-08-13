@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
+import java.awt.print.PrinterException;
 import java.io.*;
 
 public class FileManager {
@@ -62,6 +63,17 @@ public class FileManager {
     public void newFile() {
         currentFilePath = null;
         textComponent.setText(null);
+    }
+
+    /**
+     * Simple print call of the textComponents print method
+     */
+    public void print() {
+        try {
+            textComponent.print();
+        } catch (PrinterException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public String getCurrentFilePath() {
