@@ -21,6 +21,7 @@ public class MainGuiClass extends JFrame {
     static JTextArea mainTextArea;
     static JScrollPane scrollPane;
     static JCheckBoxMenuItem darkModeItem, lightModeItem;
+    static JButton dateAndTimeButton;
     static JButton searchButton;
     static JButton aboutButton;
     static JTextField searchTextField;
@@ -72,6 +73,8 @@ public class MainGuiClass extends JFrame {
         copyEditItem = new JMenuItem("Copy");
         pasteEditItem = new JMenuItem("Paste");
         deleteEditItem = new JMenuItem("Delete");
+
+        dateAndTimeButton = new JButton("Add Date & Time");
         searchButton = new JButton("Search");
         aboutButton = new JButton("About");
         searchTextField = new JTextField();
@@ -123,9 +126,8 @@ public class MainGuiClass extends JFrame {
         pasteEditItem.addActionListener(e -> editorManager.paste());
         deleteEditItem.addActionListener(e -> editorManager.delete());
 
-        //Adding ActionListener to JButton and TextField to search
-        //searchButton.addActionListener(this);
-        //searchTextField.addActionListener(this);
+        //Adding ActionListener to date and time button
+        dateAndTimeButton.addActionListener(e -> editorManager.addDateAndTime());
 
         aboutButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
@@ -143,8 +145,12 @@ public class MainGuiClass extends JFrame {
         menuBar.add(editMenu);
         menuBar.add(themeMenu);
         menuBar.add(searchTextField);
+
+        menuBar.add(dateAndTimeButton);
+
         menuBar.add(searchButton);
         menuBar.add(aboutButton);
+
 
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
