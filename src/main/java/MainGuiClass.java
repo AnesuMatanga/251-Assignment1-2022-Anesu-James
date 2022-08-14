@@ -108,6 +108,10 @@ public class MainGuiClass extends JFrame {
         newItem.addActionListener(e -> fileManger.newFile());
         openItem.addActionListener(e -> fileManger.open());
         saveItem.addActionListener(e -> fileManger.save());
+
+        //Close the frame and the program
+        exitItem.addActionListener(e -> mainFrame.dispose());
+
         printItem.addActionListener(e -> fileManger.print());
         //exitItem.addActionListener(e -> fileManger.exit());
         //fileMenu.addActionListener(this);
