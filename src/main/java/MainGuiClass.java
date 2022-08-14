@@ -104,9 +104,9 @@ public class MainGuiClass extends JFrame {
         exitItem.addActionListener(e -> mainFrame.dispose());
 
         //Adding ActionListeners to Edit Menu Items
-        cutEditItem.addActionListener(e -> editorManager.cut());
-        copyEditItem.addActionListener(e -> editorManager.copy());
-        pasteEditItem.addActionListener(e -> editorManager.paste());
+        cutEditItem.addActionListener(e -> mainTextArea.cut());
+        copyEditItem.addActionListener(e -> mainTextArea.copy());
+        pasteEditItem.addActionListener(e -> mainTextArea.paste());
         deleteEditItem.addActionListener(e -> editorManager.delete());
 
         //Adding ActionListener to date and time button
