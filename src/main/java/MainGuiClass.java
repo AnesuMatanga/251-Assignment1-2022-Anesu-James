@@ -6,6 +6,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.util.logging.*;
 
 
@@ -15,12 +16,14 @@ public class MainGuiClass extends JFrame {
     static JPanel textPanel;
     static JMenuBar menuBar;
     static JMenu fileMenu, editMenu, themeMenu;
-    static JMenuItem newItem, openItem, saveItem, exitItem,cutEditItem, copyEditItem,
+    static JMenuItem newItem, openItem, saveItem, printItem, exitItem,cutEditItem, copyEditItem,
             pasteEditItem, deleteEditItem;
     static JTextArea mainTextArea;
     static JScrollPane scrollPane;
     static JCheckBoxMenuItem darkModeItem, lightModeItem;
     static JButton dateAndTimeButton;
+    static JButton searchButton;
+    static JButton aboutButton;
     static JTextField searchTextField;
 
 
@@ -64,12 +67,16 @@ public class MainGuiClass extends JFrame {
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
         saveItem = new JMenuItem("Save");
+        printItem = new JMenuItem("Print");
         exitItem = new JMenuItem("Exit");
         cutEditItem = new JMenuItem("Cut");
         copyEditItem = new JMenuItem("Copy");
         pasteEditItem = new JMenuItem("Paste");
         deleteEditItem = new JMenuItem("Delete");
+
         dateAndTimeButton = new JButton("Add Date & Time");
+        searchButton = new JButton("Search");
+        aboutButton = new JButton("About");
         searchTextField = new JTextField();
         scrollPane = new JScrollPane(mainTextArea);
 
@@ -84,6 +91,7 @@ public class MainGuiClass extends JFrame {
         fileMenu.add(newItem);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
+        fileMenu.add(printItem);
         fileMenu.add(exitItem);
 
         //Adding Edit menu Items to Edit Menu
@@ -103,6 +111,11 @@ public class MainGuiClass extends JFrame {
         newItem.addActionListener(e -> fileManger.newFile());
         openItem.addActionListener(e -> fileManger.open());
         saveItem.addActionListener(e -> fileManger.save());
+
+        //Close the frame and the program
+        exitItem.addActionListener(e -> mainFrame.dispose());
+
+        printItem.addActionListener(e -> fileManger.print());
         //exitItem.addActionListener(e -> fileManger.exit());
         //fileMenu.addActionListener(this);
 
@@ -116,6 +129,13 @@ public class MainGuiClass extends JFrame {
         //Adding ActionListener to date and time button
         dateAndTimeButton.addActionListener(e -> editorManager.addDateAndTime());
 
+        aboutButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
+                    "Made by Anesu and James for assignment 1 of 159251 Semester 2 2022.\n" +
+                    "Search feature: Just start typing and it will search the current document for that text." +
+                    " Pressing Enter will cycle through the found occurrences of the search string.\n");
+        });
+
         //Adding DocumentListener and ActionListener to JTextField
         searchTextField.getDocument().addDocumentListener(searchBoxManager);
         searchTextField.addActionListener(searchBoxManager);
@@ -125,7 +145,12 @@ public class MainGuiClass extends JFrame {
         menuBar.add(editMenu);
         menuBar.add(themeMenu);
         menuBar.add(searchTextField);
+
         menuBar.add(dateAndTimeButton);
+
+        menuBar.add(searchButton);
+        menuBar.add(aboutButton);
+
 
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
