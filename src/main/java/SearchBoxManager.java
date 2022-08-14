@@ -1,9 +1,11 @@
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.text.*;
-import java.awt.event.ActionListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
 import java.awt.event.ActionEvent;
-import java.util.regex.*;
+import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SearchBoxManager implements DocumentListener, ActionListener {
     //Variables Initialising
@@ -64,7 +66,7 @@ public class SearchBoxManager implements DocumentListener, ActionListener {
      */
     private void keepSearching() {
         if(matchWord != null){
-            if(matchWord.find() == true) {
+            if(matchWord.find()) {
 
                 //moveDot and setDot to select the matched word
                 content.getCaret().setDot(matchWord.start());

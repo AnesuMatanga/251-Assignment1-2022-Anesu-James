@@ -4,10 +4,8 @@
  */
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.print.PrinterException;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class MainGuiClass extends JFrame {
@@ -22,14 +20,12 @@ public class MainGuiClass extends JFrame {
     static JScrollPane scrollPane;
     static JCheckBoxMenuItem darkModeItem, lightModeItem;
     static JButton dateAndTimeButton;
-    static JButton searchButton;
     static JButton aboutButton;
     static JTextField searchTextField;
 
-
-    private FileManager fileManger;
-    private EditorManager editorManager;
-    private SearchBoxManager searchBoxManager;
+    private final FileManager fileManger;
+    private final EditorManager editorManager;
+    private final SearchBoxManager searchBoxManager;
 
     //Constructor
     MainGuiClass() {
@@ -45,13 +41,7 @@ public class MainGuiClass extends JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-           Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -75,7 +65,6 @@ public class MainGuiClass extends JFrame {
         deleteEditItem = new JMenuItem("Delete");
 
         dateAndTimeButton = new JButton("Add Date & Time");
-        searchButton = new JButton("Search");
         aboutButton = new JButton("About");
         searchTextField = new JTextField();
         scrollPane = new JScrollPane(mainTextArea);
@@ -111,14 +100,8 @@ public class MainGuiClass extends JFrame {
         newItem.addActionListener(e -> fileManger.newFile());
         openItem.addActionListener(e -> fileManger.open());
         saveItem.addActionListener(e -> fileManger.save());
-
-        //Close the frame and the program
-        exitItem.addActionListener(e -> mainFrame.dispose());
-
         printItem.addActionListener(e -> fileManger.print());
-        //exitItem.addActionListener(e -> fileManger.exit());
-        //fileMenu.addActionListener(this);
-
+        exitItem.addActionListener(e -> mainFrame.dispose());
 
         //Adding ActionListeners to Edit Menu Items
         cutEditItem.addActionListener(e -> editorManager.cut());
@@ -129,12 +112,10 @@ public class MainGuiClass extends JFrame {
         //Adding ActionListener to date and time button
         dateAndTimeButton.addActionListener(e -> editorManager.addDateAndTime());
 
-        aboutButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
-                    "Made by Anesu and James for assignment 1 of 159251 Semester 2 2022.\n" +
-                    "Search feature: Just start typing and it will search the current document for that text." +
-                    " Pressing Enter will cycle through the found occurrences of the search string.\n");
-        });
+        aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
+                "Made by Anesu and James for assignment 1 of 159251 Semester 2 2022.\n" +
+                "Search feature: Just start typing and it will search the current document for that text." +
+                " Pressing Enter will cycle through the found occurrences of the search string.\n"));
 
         //Adding DocumentListener and ActionListener to JTextField
         searchTextField.getDocument().addDocumentListener(searchBoxManager);
@@ -148,7 +129,6 @@ public class MainGuiClass extends JFrame {
 
         menuBar.add(dateAndTimeButton);
 
-        menuBar.add(searchButton);
         menuBar.add(aboutButton);
 
 
@@ -160,21 +140,6 @@ public class MainGuiClass extends JFrame {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
     }
-    //If a menu Item has been selected
- /**   public void actionPerformed(ActionEvent e){
-        String selected = e.getActionCommand();
-
-        //If else statements to give commands for different menu item selections
-        if(selected.equals("New")){
-            fileManger.newFile();
-        }
-        else if(selected.equals("Open")){
-            fileManger.open();
-        }
-        else if(selected.equals("Save")){
-            fileManger.save();
-        }
-    } **/
 }
 
 

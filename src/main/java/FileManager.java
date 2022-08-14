@@ -7,7 +7,7 @@ public class FileManager {
     //File path should always be kept in absolute form
     private String currentFilePath = null;
     //Text component that will be saved from and written to.
-    private JTextComponent textComponent;
+    private final JTextComponent textComponent;
 
     /**
      * Constructor to load the field
