@@ -6,6 +6,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.util.logging.*;
 
 
@@ -15,7 +16,7 @@ public class MainGuiClass extends JFrame {
     static JPanel textPanel;
     static JMenuBar menuBar;
     static JMenu fileMenu, editMenu, themeMenu;
-    static JMenuItem newItem, openItem, saveItem, exitItem,cutEditItem, copyEditItem,
+    static JMenuItem newItem, openItem, saveItem, printItem, exitItem,cutEditItem, copyEditItem,
             pasteEditItem, deleteEditItem;
     static JTextArea mainTextArea;
     static JScrollPane scrollPane;
@@ -64,6 +65,7 @@ public class MainGuiClass extends JFrame {
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
         saveItem = new JMenuItem("Save");
+        printItem = new JMenuItem("Print");
         exitItem = new JMenuItem("Exit");
         cutEditItem = new JMenuItem("Cut");
         copyEditItem = new JMenuItem("Copy");
@@ -84,6 +86,7 @@ public class MainGuiClass extends JFrame {
         fileMenu.add(newItem);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
+        fileMenu.add(printItem);
         fileMenu.add(exitItem);
 
         //Adding Edit menu Items to Edit Menu
@@ -103,6 +106,7 @@ public class MainGuiClass extends JFrame {
         newItem.addActionListener(e -> fileManger.newFile());
         openItem.addActionListener(e -> fileManger.open());
         saveItem.addActionListener(e -> fileManger.save());
+        printItem.addActionListener(e -> fileManger.print());
         //exitItem.addActionListener(e -> fileManger.exit());
         //fileMenu.addActionListener(this);
 
