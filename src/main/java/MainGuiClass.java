@@ -14,7 +14,7 @@ public class MainGuiClass extends JFrame {
     static JPanel textPanel;
     static JMenuBar menuBar;
     static JMenu fileMenu, editMenu, themeMenu;
-    static JMenuItem newItem, openItem, saveItem, printItem, exitItem,cutEditItem, copyEditItem,
+    static JMenuItem newItem, openItem, saveItem, saveToPDFItem, printItem, exitItem,cutEditItem, copyEditItem,
             pasteEditItem, deleteEditItem;
     static JTextArea mainTextArea;
     static JScrollPane scrollPane;
@@ -57,6 +57,7 @@ public class MainGuiClass extends JFrame {
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
         saveItem = new JMenuItem("Save");
+        saveToPDFItem = new JMenuItem("Save to PDF");
         printItem = new JMenuItem("Print");
         exitItem = new JMenuItem("Exit");
         cutEditItem = new JMenuItem("Cut");
@@ -80,6 +81,7 @@ public class MainGuiClass extends JFrame {
         fileMenu.add(newItem);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
+        fileMenu.add(saveToPDFItem);
         fileMenu.add(printItem);
         fileMenu.add(exitItem);
 
@@ -100,6 +102,7 @@ public class MainGuiClass extends JFrame {
         newItem.addActionListener(e -> fileManger.newFile());
         openItem.addActionListener(e -> fileManger.open());
         saveItem.addActionListener(e -> fileManger.save());
+        saveToPDFItem.addActionListener(e -> fileManger.saveToPDF());
         printItem.addActionListener(e -> fileManger.print());
         exitItem.addActionListener(e -> mainFrame.dispose());
 
