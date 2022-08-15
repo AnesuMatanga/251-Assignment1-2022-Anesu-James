@@ -80,6 +80,10 @@ public class FileManager {
      * Save current document to PDF
      */
     public void saveToPDF() {
+        if (textComponent.getText().equals("")) {
+            JOptionPane.showMessageDialog(textComponent, "You need to have atleast some text to save to PDF");
+            return;
+        }
         JFileChooser fileChooser;
         if (currentFilePath != null) {
             fileChooser = new JFileChooser(new File(currentFilePath));
