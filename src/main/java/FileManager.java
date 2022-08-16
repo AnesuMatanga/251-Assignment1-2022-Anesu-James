@@ -2,6 +2,12 @@ import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.print.PrinterException;
 import java.io.*;
+import java.net.URI;
+import java.nio.file.Files;
+import org.apache.commons.io.FilenameUtils;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
 
 public class FileManager {
     //File path should always be kept in absolute form
@@ -48,10 +54,18 @@ public class FileManager {
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
             File fileToOpen = new File (currentFilePath);
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
-                textComponent.read(bufferedReader, null);
-                bufferedReader.close();
-            } catch (IOException e) {
+                switch (FilenameUtils.getExtension(fileToOpen.getAbsolutePath())) {
+                    case "txt":
+                        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
+                        textComponent.read(bufferedReader, null);
+                        bufferedReader.close();
+                        break;
+                    case "odt":
+                        OdfDocument odt = OdfDocument.loadDocument(fileToOpen);
+                        textComponent.setText(odt.getContentRoot().getTextContent());
+                }
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
