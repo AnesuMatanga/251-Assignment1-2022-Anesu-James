@@ -39,28 +39,41 @@ public class FileManager {
             if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
         }
-        //Switch statement used as more file types will be added in the future
+        //Switch statement used as more file types will be added in the future. This could later switched into
+        //a save class or something, but currently it is left as is.
         switch (FilenameUtils.getExtension(currentFilePath)) {
             case "odt":
+                //Change file path to txt and save
                 currentFilePath = null;
                 this.save();
                 return;
             case "pdf":
-                JOptionPane.showMessageDialog(textComponent, "Sorry saving to PDF can only be done on a " +
-                        "seperate button at the moment");
+                try {
+                    Document doc = new Document();
+                    PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(currentFilePath));
+                    Font font = new Font(Font.HELVETICA, 11, Font.NORMAL, Color.BLACK);
+                    doc.open();
+                    if (!textComponent.getText().equals("")) {
+                        Paragraph para = new Paragraph(textComponent.getText(), font);
+                        doc.add(para);
+                    }
+                    doc.close();
+                    writer.close();
+                } catch (DocumentException | FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
+                fileToSave = new File(currentFilePath);
+                try {
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileToSave));
+                    textComponent.write(bufferedWriter);
+                    bufferedWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
-        }
-        fileToSave = new File(currentFilePath);
-        try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileToSave));
-            textComponent.write(bufferedWriter);
-            bufferedWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+        }}
 
     /**
      * Opens the file at currentFilePath and loads it in the textComponent
@@ -109,39 +122,6 @@ public class FileManager {
     public void newFile() {
         currentFilePath = null;
         textComponent.setText(null);
-    }
-
-    /**
-     * Save current document to PDF
-     */
-    public void saveToPDF() {
-        if (textComponent.getText().equals("")) {
-            JOptionPane.showMessageDialog(textComponent, "You need to have atleast some text to save to PDF");
-            return;
-        }
-        JFileChooser fileChooser;
-        if (currentFilePath != null) {
-            fileChooser = new JFileChooser(new File(currentFilePath));
-            fileChooser.setSelectedFile(new File(currentFilePath.replace(".txt", ".pdf")));
-        } else {
-            fileChooser = new JFileChooser();
-        }
-
-        int fileChooserResult = fileChooser.showSaveDialog(textComponent);
-        if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
-        String pdfFileLocation = fileChooser.getSelectedFile().getAbsolutePath();
-        try {
-            Document doc = new Document();
-            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(pdfFileLocation));
-            Font font = new Font(Font.HELVETICA, 11, Font.BOLDITALIC, Color.BLACK);
-            doc.open();
-            Paragraph para = new Paragraph(textComponent.getText(), font);
-            doc.add(para);
-            doc.close();
-            writer.close();
-        } catch (DocumentException | FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
