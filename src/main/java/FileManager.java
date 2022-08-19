@@ -1,3 +1,8 @@
+import org.apache.commons.io.FilenameUtils;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.text.JTextComponent;
@@ -39,6 +44,14 @@ public class FileManager {
             if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
         }
+        switch (FilenameUtils.getExtension(currentFilePath)) {
+            case "txt":
+                break;
+            case "odt":
+                currentFilePath = null;
+                this.save();
+                return;
+        }
         fileToSave = new File(currentFilePath);
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileToSave));
@@ -59,10 +72,27 @@ public class FileManager {
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
             File fileToOpen = new File(currentFilePath);
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
-                textComponent.read(bufferedReader, null);
-                bufferedReader.close();
-            } catch (IOException e) {
+                switch (FilenameUtils.getExtension(currentFilePath)) {
+                    case "txt":
+                        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
+                        textComponent.read(bufferedReader, null);
+                        bufferedReader.close();
+                        break;
+                    case "odt":
+                        OdfTextDocument odt = OdfTextDocument.loadDocument(fileToOpen);
+                        StringBuilder textFromODT = new StringBuilder();
+
+                        TextPElement currentLine = OdfElement.findFirstChildNode(TextPElement.class, odt.getContentRoot());
+                        textFromODT.append(currentLine.getTextContent());
+                        while (OdfElement.findNextChildNode(TextPElement.class, currentLine) != null) {
+                            textFromODT.append("\n");
+                            currentLine = OdfElement.findNextChildNode(TextPElement.class, currentLine);
+                            textFromODT.append(currentLine.getTextContent());
+                        }
+                        textComponent.setText(textFromODT.toString());
+                }
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

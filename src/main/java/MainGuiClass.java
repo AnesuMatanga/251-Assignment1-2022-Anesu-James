@@ -4,13 +4,16 @@
  */
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.util.logging.*;
 
 
-public class MainGuiClass extends JFrame {
+public class MainGuiClass extends JFrame implements ActionListener{
     //Initialising Fields
     static JFrame mainFrame;
     static JPanel textPanel;
@@ -20,16 +23,21 @@ public class MainGuiClass extends JFrame {
             pasteEditItem, deleteEditItem;
     static JTextArea mainTextArea;
     static JScrollPane scrollPane;
-    static JCheckBoxMenuItem darkModeItem, lightModeItem;
+    static JSpinner fontSizeSpinner;
+    static JLabel fontSizeSpinnerLabel;
+    static JButton fontColourButton;
     static JButton dateAndTimeButton;
-    static JButton searchButton;
+    //static JButton searchButton;
     static JButton aboutButton;
     static JTextField searchTextField;
+    static JLabel searchBoxLabel;
 
 
-    private FileManager fileManger;
+    private FileManager fileManager;
     private EditorManager editorManager;
     private SearchBoxManager searchBoxManager;
+    private FontManager defaultFontSize;
+
 
     //Constructor
     MainGuiClass() {
@@ -61,8 +69,9 @@ public class MainGuiClass extends JFrame {
         fileMenu = new JMenu("File");
         editMenu = new JMenu("Edit");
         themeMenu = new JMenu("Theme");
-        darkModeItem = new JCheckBoxMenuItem("Dark Mode");
-        lightModeItem = new JCheckBoxMenuItem("Light Mode");
+        fontSizeSpinner = new JSpinner();
+        fontSizeSpinnerLabel = new JLabel("Font:");
+        fontColourButton = new JButton("Colour");
         mainTextArea = new JTextArea();
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
@@ -75,14 +84,15 @@ public class MainGuiClass extends JFrame {
         deleteEditItem = new JMenuItem("Delete");
 
         dateAndTimeButton = new JButton("Add Date & Time");
-        searchButton = new JButton("Search");
         aboutButton = new JButton("About");
         searchTextField = new JTextField();
+        searchBoxLabel = new JLabel("Search:");
         scrollPane = new JScrollPane(mainTextArea);
 
-        fileManger = new FileManager(mainTextArea);
+        fileManager = new FileManager(mainTextArea);
         editorManager = new EditorManager(mainTextArea);
         searchBoxManager = new SearchBoxManager(mainTextArea);
+        defaultFontSize = new FontManager();
 
         //Adding the mainTextArea to the textPanel
         //textPanel.add(mainTextArea);
@@ -100,28 +110,35 @@ public class MainGuiClass extends JFrame {
         editMenu.add(pasteEditItem);
         editMenu.add(deleteEditItem);
 
-        //Adding Theme menu Items to Theme Menu
-        darkModeItem.setSelected(false);
-        themeMenu.add(darkModeItem);
+        //Set fontSizeSpinner preferred size from Config.yml File
+        fontSizeSpinner.setPreferredSize(new Dimension(50, 25));
+        fontSizeSpinner.setValue(defaultFontSize.getConfigProperty("font_size"));
+        fontSizeSpinner.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                mainTextArea.setFont(new Font(mainTextArea.getFont()
+                        .getFamily(), Font.PLAIN,(int) fontSizeSpinner.getValue()));
+            }
+        });
 
-        lightModeItem.setSelected(true);
-        themeMenu.add(lightModeItem);
+        //Add Action Listener to font colour button
+        fontColourButton.addActionListener(this);
+
 
         //Adding ActionListeners to the Menu Items (lambda expression)
-        newItem.addActionListener(e -> fileManger.newFile());
-        openItem.addActionListener(e -> fileManger.open());
-        saveItem.addActionListener(e -> fileManger.save());
-
-        //Close the frame and the program
+        newItem.addActionListener(e -> fileManager.newFile());
+        openItem.addActionListener(e -> fileManager.open());
+        saveItem.addActionListener(e -> fileManager.save());
+        printItem.addActionListener(e -> fileManager.print());
         exitItem.addActionListener(e -> mainFrame.dispose());
-
-        printItem.addActionListener(e -> fileManger.print());
-        //exitItem.addActionListener(e -> fileManger.exit());
-        //fileMenu.addActionListener(this);
 
 
         //Adding ActionListeners to Edit Menu Items
+        cutEditItem.addActionListener(e -> mainTextArea.cut());
+        copyEditItem.addActionListener(e -> mainTextArea.copy());
+        pasteEditItem.addActionListener(e -> mainTextArea.paste());
         deleteEditItem.addActionListener(e -> editorManager.delete());
+
         //Adding ActionListener to date and time button
         dateAndTimeButton.addActionListener(e -> editorManager.addDateAndTime());
 
@@ -139,14 +156,13 @@ public class MainGuiClass extends JFrame {
         //Adding the menu to the menuBar
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
-        menuBar.add(themeMenu);
+        menuBar.add(searchBoxLabel);
         menuBar.add(searchTextField);
-
+        menuBar.add(fontColourButton);
+        menuBar.add(fontSizeSpinnerLabel);
+        menuBar.add(fontSizeSpinner);
         menuBar.add(dateAndTimeButton);
-
-        menuBar.add(searchButton);
         menuBar.add(aboutButton);
-
 
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
@@ -155,6 +171,19 @@ public class MainGuiClass extends JFrame {
         //mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //check if event is button
+        if(e.getSource()==fontColourButton) {
+            JColorChooser colorChooser = new JColorChooser();
+
+            Color colour = colorChooser.showDialog(null, "Choose a color"
+                    , Color.black);
+
+            mainTextArea.setForeground(colour);
+        }
     }
 }
 
