@@ -44,13 +44,14 @@ public class FileManager {
             if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
         }
+        //Switch statement used as more file types will be added in the future
         switch (FilenameUtils.getExtension(currentFilePath)) {
-            case "txt":
-                break;
             case "odt":
                 currentFilePath = null;
                 this.save();
                 return;
+            default:
+                break;
         }
         fileToSave = new File(currentFilePath);
         try {
@@ -72,12 +73,8 @@ public class FileManager {
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
             File fileToOpen = new File(currentFilePath);
             try {
+                //Switch statement used as more file types will be added later
                 switch (FilenameUtils.getExtension(currentFilePath)) {
-                    case "txt":
-                        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
-                        textComponent.read(bufferedReader, null);
-                        bufferedReader.close();
-                        break;
                     case "odt":
                         OdfTextDocument odt = OdfTextDocument.loadDocument(fileToOpen);
                         StringBuilder textFromODT = new StringBuilder();
@@ -90,6 +87,11 @@ public class FileManager {
                             textFromODT.append(currentLine.getTextContent());
                         }
                         textComponent.setText(textFromODT.toString());
+                    default:
+                        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
+                        textComponent.read(bufferedReader, null);
+                        bufferedReader.close();
+                        break;
                 }
 
             } catch (Exception e) {
