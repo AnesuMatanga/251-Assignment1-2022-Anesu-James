@@ -1,23 +1,18 @@
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 import org.apache.commons.io.FilenameUtils;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.print.PrinterException;
 import java.io.*;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Font;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfWriter;
-
-import static com.lowagie.text.pdf.PdfName.DEST;
 
 public class FileManager {
     //File path should always be kept in absolute form
@@ -44,13 +39,18 @@ public class FileManager {
             if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
         }
+        //Switch statement used as more file types will be added in the future
         switch (FilenameUtils.getExtension(currentFilePath)) {
-            case "txt":
-                break;
             case "odt":
                 currentFilePath = null;
                 this.save();
                 return;
+            case "pdf":
+                JOptionPane.showMessageDialog(textComponent, "Sorry saving to PDF can only be done on a " +
+                        "seperate button at the moment");
+                break;
+            default:
+                break;
         }
         fileToSave = new File(currentFilePath);
         try {
@@ -72,12 +72,8 @@ public class FileManager {
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
             File fileToOpen = new File(currentFilePath);
             try {
+                //Switch statement used as more file types will be added later
                 switch (FilenameUtils.getExtension(currentFilePath)) {
-                    case "txt":
-                        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
-                        textComponent.read(bufferedReader, null);
-                        bufferedReader.close();
-                        break;
                     case "odt":
                         OdfTextDocument odt = OdfTextDocument.loadDocument(fileToOpen);
                         StringBuilder textFromODT = new StringBuilder();
@@ -90,6 +86,15 @@ public class FileManager {
                             textFromODT.append(currentLine.getTextContent());
                         }
                         textComponent.setText(textFromODT.toString());
+                    case "pdf":
+                        JOptionPane.showMessageDialog(textComponent, "Sorry Reading from PDFs is not yet" +
+                                " implemented, hopefully will be in the future");
+                        break;
+                    default:
+                        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
+                        textComponent.read(bufferedReader, null);
+                        bufferedReader.close();
+                        break;
                 }
 
             } catch (Exception e) {
