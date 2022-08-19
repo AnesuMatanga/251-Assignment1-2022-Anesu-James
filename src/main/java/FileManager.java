@@ -4,9 +4,20 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.text.JTextComponent;
+import java.awt.*;
 import java.awt.print.PrinterException;
 import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+
+import static com.lowagie.text.pdf.PdfName.DEST;
 
 public class FileManager {
     //File path should always be kept in absolute form
@@ -59,7 +70,7 @@ public class FileManager {
         int fileChooserResult = fileChooser.showOpenDialog(textComponent);
         if (fileChooserResult == JFileChooser.APPROVE_OPTION) {
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-            File fileToOpen = new File (currentFilePath);
+            File fileToOpen = new File(currentFilePath);
             try {
                 switch (FilenameUtils.getExtension(currentFilePath)) {
                     case "txt":
@@ -93,6 +104,39 @@ public class FileManager {
     public void newFile() {
         currentFilePath = null;
         textComponent.setText(null);
+    }
+
+    /**
+     * Save current document to PDF
+     */
+    public void saveToPDF() {
+        if (textComponent.getText().equals("")) {
+            JOptionPane.showMessageDialog(textComponent, "You need to have atleast some text to save to PDF");
+            return;
+        }
+        JFileChooser fileChooser;
+        if (currentFilePath != null) {
+            fileChooser = new JFileChooser(new File(currentFilePath));
+            fileChooser.setSelectedFile(new File(currentFilePath.replace(".txt", ".pdf")));
+        } else {
+            fileChooser = new JFileChooser();
+        }
+
+        int fileChooserResult = fileChooser.showSaveDialog(textComponent);
+        if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
+        String pdfFileLocation = fileChooser.getSelectedFile().getAbsolutePath();
+        try {
+            Document doc = new Document();
+            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(pdfFileLocation));
+            Font font = new Font(Font.HELVETICA, 11, Font.BOLDITALIC, Color.BLACK);
+            doc.open();
+            Paragraph para = new Paragraph(textComponent.getText(), font);
+            doc.add(para);
+            doc.close();
+            writer.close();
+        } catch (DocumentException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
