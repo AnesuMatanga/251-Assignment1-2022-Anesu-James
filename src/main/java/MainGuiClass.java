@@ -3,6 +3,9 @@
  * classes with functions to make the text editor act a certain way
  */
 
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -21,8 +24,8 @@ public class MainGuiClass extends JFrame implements ActionListener{
     static JMenu fileMenu, editMenu, themeMenu;
     static JMenuItem newItem, openItem, saveItem, printItem, exitItem, cutEditItem, copyEditItem,
             pasteEditItem, deleteEditItem;
-    static JTextArea mainTextArea;
-    static JScrollPane scrollPane;
+    static RSyntaxTextArea mainTextArea;
+    static RTextScrollPane scrollPane;
     static JSpinner fontSizeSpinner;
     static JLabel fontSizeSpinnerLabel;
     static JButton fontColourButton;
@@ -72,7 +75,7 @@ public class MainGuiClass extends JFrame implements ActionListener{
         fontSizeSpinner = new JSpinner();
         fontSizeSpinnerLabel = new JLabel("Font:");
         fontColourButton = new JButton("Colour");
-        mainTextArea = new JTextArea();
+        mainTextArea = new RSyntaxTextArea();
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
         saveItem = new JMenuItem("Save");
@@ -87,15 +90,17 @@ public class MainGuiClass extends JFrame implements ActionListener{
         aboutButton = new JButton("About");
         searchTextField = new JTextField();
         searchBoxLabel = new JLabel("Search:");
-        scrollPane = new JScrollPane(mainTextArea);
+        scrollPane = new RTextScrollPane(mainTextArea);
 
         fileManager = new FileManager(mainTextArea);
         editorManager = new EditorManager(mainTextArea);
         searchBoxManager = new SearchBoxManager(mainTextArea);
         defaultFontSize = new FontManager();
 
-        //Adding the mainTextArea to the textPanel
-        //textPanel.add(mainTextArea);
+        //Adding SyntaxConstants (RSyntaxTextArea JAR) to the mainTextArea for highlighting different languages
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
+        mainTextArea.setCodeFoldingEnabled(true);
 
         //Adding menu Items to menu
         fileMenu.add(newItem);
