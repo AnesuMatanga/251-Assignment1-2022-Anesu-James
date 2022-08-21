@@ -10,6 +10,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
+import javax.swing.text.rtf.RTFEditorKit;
 import java.awt.*;
 import java.awt.print.PrinterException;
 import java.io.*;
@@ -39,9 +40,10 @@ public class FileManager {
             if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
             currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
         }
-        //Switch statement used as more file types will be added in the future. This could later switched into
+        //Switch statement used as more file types will be added in the future. This could later change into
         //a save class or something, but currently it is left as is.
         switch (FilenameUtils.getExtension(currentFilePath)) {
+            case "rtf":
             case "odt":
                 //Change file path to txt and save
                 currentFilePath = null;
@@ -102,6 +104,13 @@ public class FileManager {
                     case "pdf":
                         JOptionPane.showMessageDialog(textComponent, "Sorry Reading from PDFs is not yet" +
                                 " implemented, hopefully will be in the future");
+                        break;
+                    case "rtf":
+                        RTFEditorKit rtfParser = new RTFEditorKit();
+                        javax.swing.text.Document document = rtfParser.createDefaultDocument();
+                        rtfParser.read(new FileInputStream(currentFilePath), document, 0);
+                        String text = document.getText(0, document.getLength());
+                        textComponent.setText(text);
                         break;
                     default:
                         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
