@@ -43,6 +43,7 @@ public class FileManager {
         //Switch statement used as more file types will be added in the future. This could later change into
         //a save class or something, but currently it is left as is.
         switch (FilenameUtils.getExtension(currentFilePath)) {
+            case "rtf":
             case "odt":
                 //Change file path to txt and save
                 currentFilePath = null;
