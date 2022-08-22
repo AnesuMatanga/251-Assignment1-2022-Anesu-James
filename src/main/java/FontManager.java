@@ -13,7 +13,7 @@ public class FontManager {
 
         {
             try {
-                inputStream = new FileInputStream(new File("target/config.yml"));
+                inputStream = new FileInputStream("config.yml");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -21,8 +21,7 @@ public class FontManager {
 
         Yaml yaml = new Yaml();
         Map<String, Object> data = yaml.load(inputStream);
-        Object propertyValue = data.get(property);
 
-        return propertyValue;
+        return data.get(property);
     }
 }
