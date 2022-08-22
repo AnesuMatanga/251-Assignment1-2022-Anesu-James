@@ -28,13 +28,14 @@ public class SearchBoxManager implements DocumentListener, ActionListener {
         startSearch(event.getDocument());
     }
 
+    /**
+     * Gives notification that an attribute or set of attributes changed.
+     *
+     * @param e the document event
+     */
     @Override
     public void changedUpdate(DocumentEvent e) {
 
-    }
-
-    public void changeUpdate(DocumentEvent event){
-        startSearch(event.getDocument());
     }
 
     /**
