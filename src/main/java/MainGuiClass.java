@@ -12,7 +12,6 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.print.PrinterException;
 import java.util.logging.*;
 
 
@@ -39,7 +38,7 @@ public class MainGuiClass extends JFrame implements ActionListener{
     private FileManager fileManager;
     private EditorManager editorManager;
     private SearchBoxManager searchBoxManager;
-    private FontManager defaultFontSize;
+    private ConfigManager configManager;
 
 
     //Constructor
@@ -95,7 +94,7 @@ public class MainGuiClass extends JFrame implements ActionListener{
         fileManager = new FileManager(mainTextArea);
         editorManager = new EditorManager(mainTextArea);
         searchBoxManager = new SearchBoxManager(mainTextArea);
-        defaultFontSize = new FontManager();
+        configManager = new ConfigManager();
 
         //Adding SyntaxConstants (RSyntaxTextArea JAR) to the mainTextArea for highlighting different languages
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
@@ -117,7 +116,7 @@ public class MainGuiClass extends JFrame implements ActionListener{
 
         //Set fontSizeSpinner preferred size from Config.yml File
         fontSizeSpinner.setPreferredSize(new Dimension(50, 25));
-        fontSizeSpinner.setValue(defaultFontSize.getConfigProperty("font_size"));
+        fontSizeSpinner.setValue(configManager.getConfigProperty("font_size"));
         fontSizeSpinner.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {

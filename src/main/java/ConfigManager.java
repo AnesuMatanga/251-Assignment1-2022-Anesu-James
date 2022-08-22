@@ -1,12 +1,11 @@
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
 
-public class FontManager {
+public class ConfigManager {
     //Method to get properties set in the Config.yml file
     public Object getConfigProperty(String property) {
         InputStream inputStream = null;
