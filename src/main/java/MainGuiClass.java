@@ -102,6 +102,7 @@ public class MainGuiClass extends JFrame implements ActionListener{
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
         mainTextArea.setCodeFoldingEnabled(true);
+        mainTextArea.getDocument().addDocumentListener(fileManager.getTextAreaListener());
 
         //Adding menu Items to menu
         fileMenu.add(newItem);
@@ -171,7 +172,6 @@ public class MainGuiClass extends JFrame implements ActionListener{
         menuBar.add(fontSizeSpinner);
         menuBar.add(dateAndTimeButton);
         menuBar.add(aboutButton);
-
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
         mainFrame.add(scrollPane);

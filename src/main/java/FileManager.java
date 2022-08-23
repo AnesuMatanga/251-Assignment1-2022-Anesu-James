@@ -9,6 +9,8 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.rtf.RTFEditorKit;
 import java.awt.*;
@@ -18,8 +20,10 @@ import java.io.*;
 public class FileManager {
     //File path should always be kept in absolute form
     private String currentFilePath = null;
+    private boolean isSaved = false;
     //Text component that will be saved from and written to.
     private final JTextComponent textComponent;
+    private final TextAreaListener textAreaListener;
 
     /**
      * Constructor to load the field
@@ -27,6 +31,7 @@ public class FileManager {
      */
     public FileManager(JTextComponent textComponent) {
         this.textComponent = textComponent;
+        this.textAreaListener = new TextAreaListener();
     }
 
     /**
@@ -64,6 +69,7 @@ public class FileManager {
                 break;
             default: //Assuming file is txt format
                 currentFilePath = fileToSave.getAbsolutePath();
+                changeSavedSate(true);
                 try {
                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileToSave));
                     textComponent.write(bufferedWriter);
@@ -98,7 +104,7 @@ public class FileManager {
             File fileToOpen = fileChooser.getSelectedFile();
             try {
                 //Switch statement used as more file types will be added later
-                switch (FilenameUtils.getExtension(currentFilePath)) {
+                switch (FilenameUtils.getExtension(fileToOpen.getAbsolutePath())) {
                     case "odt":
                         OdfTextDocument odt = OdfTextDocument.loadDocument(fileToOpen);
                         StringBuilder textFromODT = new StringBuilder();
@@ -111,6 +117,7 @@ public class FileManager {
                             textFromODT.append(currentLine.getTextContent());
                         }
                         textComponent.setText(textFromODT.toString());
+                        break;
                     case "pdf":
                         JOptionPane.showMessageDialog(textComponent, "Sorry Reading from PDFs is not yet" +
                                 " implemented, hopefully will be in the future");
@@ -127,9 +134,9 @@ public class FileManager {
                         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
                         textComponent.read(bufferedReader, null);
                         bufferedReader.close();
+                        changeSavedSate(true);
                         break;
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -157,5 +164,61 @@ public class FileManager {
 
     public String getCurrentFilePath() {
         return currentFilePath;
+    }
+
+    private void changeSavedSate(Boolean newSavedState) {
+        if (isSaved == newSavedState) return;
+        else isSaved = newSavedState;
+        if (isSaved) {
+            setTitle(new File(currentFilePath).getName());
+        } else {
+            setTitle(new File(currentFilePath).getName() + " *");
+        }
+    }
+
+    private void setTitle(String title) {
+        textComponent.setBorder(BorderFactory.createTitledBorder(title));
+    }
+
+
+    class TextAreaListener implements DocumentListener {
+
+        /**
+         * Gives notification that there was an insert into the document.  The
+         * range given by the DocumentEvent bounds the freshly inserted region.
+         *
+         * @param e the document event
+         */
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            changeSavedSate(false);
+        }
+
+        /**
+         * Gives notification that a portion of the document has been
+         * removed.  The range is given in terms of what the view last
+         * saw (that is, before updating sticky positions).
+         *
+         * @param e the document event
+         */
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            changeSavedSate(false);
+        }
+
+        /**
+         * Gives notification that an attribute or set of attributes changed.
+         *
+         * @param e the document event
+         */
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+
+        }
+
+    }
+
+    public TextAreaListener getTextAreaListener() {
+        return textAreaListener;
     }
 }
