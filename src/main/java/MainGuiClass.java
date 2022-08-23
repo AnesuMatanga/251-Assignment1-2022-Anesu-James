@@ -132,7 +132,7 @@ public class MainGuiClass extends JFrame{
                         .getFamily(), Font.PLAIN,(int) fontSizeSpinner.getValue()));
             }
         });
-        fontSizeSpinner.setValue(defaultFontSize.getConfigProperty("font_size"));
+        fontSizeSpinner.setValue(configManager.getConfigProperty("font_size"));
 
         //Add Action Listener to font colour button
 
