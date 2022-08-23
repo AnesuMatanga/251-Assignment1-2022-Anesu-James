@@ -21,7 +21,7 @@ public class MainGuiClass extends JFrame implements ActionListener{
     static JPanel textPanel;
     static JMenuBar menuBar;
     static JMenu fileMenu, editMenu, themeMenu;
-    static JMenuItem newItem, openItem, saveItem, printItem, exitItem, cutEditItem, copyEditItem,
+    static JMenuItem newItem, openItem, saveItem, saveAsItem, printItem, exitItem, cutEditItem, copyEditItem,
             pasteEditItem, deleteEditItem;
     static RSyntaxTextArea mainTextArea;
     static RTextScrollPane scrollPane;
@@ -78,6 +78,7 @@ public class MainGuiClass extends JFrame implements ActionListener{
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
         saveItem = new JMenuItem("Save");
+        saveAsItem = new JMenuItem("Save As");
         printItem = new JMenuItem("Print");
         exitItem = new JMenuItem("Exit");
         cutEditItem = new JMenuItem("Cut");
@@ -100,11 +101,13 @@ public class MainGuiClass extends JFrame implements ActionListener{
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
         mainTextArea.setCodeFoldingEnabled(true);
+        mainTextArea.getDocument().addDocumentListener(fileManager.getTextAreaListener());
 
         //Adding menu Items to menu
         fileMenu.add(newItem);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
+        fileMenu.add(saveAsItem);
         fileMenu.add(printItem);
         fileMenu.add(exitItem);
 
@@ -133,6 +136,7 @@ public class MainGuiClass extends JFrame implements ActionListener{
         newItem.addActionListener(e -> fileManager.newFile());
         openItem.addActionListener(e -> fileManager.open());
         saveItem.addActionListener(e -> fileManager.save());
+        saveAsItem.addActionListener(e -> fileManager.saveAs());
         printItem.addActionListener(e -> fileManager.print());
         exitItem.addActionListener(e -> mainFrame.dispose());
 
@@ -167,7 +171,6 @@ public class MainGuiClass extends JFrame implements ActionListener{
         menuBar.add(fontSizeSpinner);
         menuBar.add(dateAndTimeButton);
         menuBar.add(aboutButton);
-
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
         mainFrame.add(scrollPane);
