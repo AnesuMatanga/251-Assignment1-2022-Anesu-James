@@ -10,9 +10,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.print.PrinterException;
 import java.util.logging.*;
 
 
@@ -38,7 +35,7 @@ public class MainGuiClass extends JFrame{
     private FileManager fileManager;
     private EditorManager editorManager;
     private SearchBoxManager searchBoxManager;
-    private FontManager defaultFontSize;
+    private ConfigManager defaultFontSize;
 
 
     //Constructor
@@ -93,7 +90,7 @@ public class MainGuiClass extends JFrame{
         fileManager = new FileManager(mainTextArea);
         editorManager = new EditorManager(mainTextArea);
         searchBoxManager = new SearchBoxManager(mainTextArea);
-        defaultFontSize = new FontManager();
+        defaultFontSize = new ConfigManager();
 
         //Adding SyntaxConstants (RSyntaxTextArea JAR) to the mainTextArea for highlighting different languages
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);

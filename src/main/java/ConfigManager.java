@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
 
-public class FontManager {
+public class ConfigManager {
     //Method to get properties set in the Config.yml file such as Font properties using snakeyml
     public Object getConfigProperty(String property) {
         InputStream inputStream = null;
