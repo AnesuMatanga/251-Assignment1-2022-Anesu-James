@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.*;
 
 
@@ -19,7 +21,7 @@ public class MainGuiClass extends JFrame{
     static JPanel textPanel;
     static JMenuBar menuBar;
     static JMenu fileMenu, editMenu, themeMenu;
-    static JMenuItem newItem, openItem, saveItem, printItem, exitItem, cutEditItem, copyEditItem,
+    static JMenuItem newItem, openItem, saveItem, saveAsItem, printItem, exitItem, cutEditItem, copyEditItem,
             pasteEditItem, deleteEditItem;
     static RSyntaxTextArea mainTextArea;
     static RTextScrollPane scrollPane;
@@ -35,7 +37,7 @@ public class MainGuiClass extends JFrame{
     private FileManager fileManager;
     private EditorManager editorManager;
     private SearchBoxManager searchBoxManager;
-    private ConfigManager defaultFontSize;
+    private ConfigManager configManager;
 
 
     //Constructor
@@ -74,6 +76,7 @@ public class MainGuiClass extends JFrame{
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
         saveItem = new JMenuItem("Save");
+        saveAsItem = new JMenuItem("Save As");
         printItem = new JMenuItem("Print");
         exitItem = new JMenuItem("Exit");
         cutEditItem = new JMenuItem("Cut");
@@ -90,7 +93,7 @@ public class MainGuiClass extends JFrame{
         fileManager = new FileManager(mainTextArea);
         editorManager = new EditorManager(mainTextArea);
         searchBoxManager = new SearchBoxManager(mainTextArea);
-        defaultFontSize = new ConfigManager();
+        configManager = new ConfigManager();
 
         //Adding SyntaxConstants (RSyntaxTextArea JAR) to the mainTextArea for highlighting different languages
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
@@ -104,11 +107,13 @@ public class MainGuiClass extends JFrame{
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
         mainTextArea.setCodeFoldingEnabled(true);
+        mainTextArea.getDocument().addDocumentListener(fileManager.getTextAreaListener());
 
         //Adding menu Items to menu
         fileMenu.add(newItem);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
+        fileMenu.add(saveAsItem);
         fileMenu.add(printItem);
         fileMenu.add(exitItem);
 
@@ -137,6 +142,7 @@ public class MainGuiClass extends JFrame{
         newItem.addActionListener(e -> fileManager.newFile());
         openItem.addActionListener(e -> fileManager.open());
         saveItem.addActionListener(e -> fileManager.save());
+        saveAsItem.addActionListener(e -> fileManager.saveAs());
         printItem.addActionListener(e -> fileManager.print());
         exitItem.addActionListener(e -> mainFrame.dispose());
 
@@ -170,7 +176,6 @@ public class MainGuiClass extends JFrame{
         menuBar.add(fontSizeSpinner);
         menuBar.add(dateAndTimeButton);
         menuBar.add(aboutButton);
-
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
         mainFrame.add(scrollPane);
