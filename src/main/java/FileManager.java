@@ -30,11 +30,12 @@ public class FileManager {
     }
 
     /**
-     * Save method will take contents from JTextComponent and save it to the currentFilePath. If needed will choose new file location.
+     * Save method will take contents from JTextComponent and save it to the currentFilePath.
+     * It is private and can only be accessed by the save and saveas Methods.
      */
-    public void save() {
+    private void save(Boolean saveAs) {
         File fileToSave;
-        if (currentFilePath == null) {
+        if (currentFilePath == null || saveAs) {
             JFileChooser fileChooser = new JFileChooser();
             int fileChooserResult = fileChooser.showSaveDialog(textComponent);
             if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
@@ -47,7 +48,7 @@ public class FileManager {
             case "odt":
                 //Change file path to txt and save
                 currentFilePath = null;
-                this.save();
+                this.save(true);
                 return;
             case "pdf":
                 try {
@@ -75,8 +76,22 @@ public class FileManager {
                     e.printStackTrace();
                 }
                 break;
-        }}
+        }
+    }
 
+    /**
+     * Overloaded save method to call the main save method but with false parameter
+     */
+    public void save() {
+        this.save(false);
+    }
+
+    /**
+     * Method will call save method with the saveAs parameter true
+     */
+    public void saveAs() {
+        this.save(true);
+    }
     /**
      * Opens the file at currentFilePath and loads it in the textComponent
      */
