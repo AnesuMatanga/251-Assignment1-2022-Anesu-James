@@ -39,21 +39,17 @@ public class FileManager {
             JFileChooser fileChooser = new JFileChooser();
             int fileChooserResult = fileChooser.showSaveDialog(textComponent);
             if (fileChooserResult != JFileChooser.APPROVE_OPTION) return;
-            currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+            fileToSave = fileChooser.getSelectedFile();
+        } else {
+            fileToSave = new File(currentFilePath);
         }
         //Switch statement used as more file types will be added in the future. This could later change into
         //a save class or something, but currently it is left as is.
-        switch (FilenameUtils.getExtension(currentFilePath)) {
-            case "rtf":
-            case "odt":
-                //Change file path to txt and save
-                currentFilePath = null;
-                this.save(true);
-                return;
+        switch (FilenameUtils.getExtension(fileToSave.getAbsolutePath())) {
             case "pdf":
                 try {
                     Document doc = new Document();
-                    PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(currentFilePath));
+                    PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(fileToSave));
                     Font font = new Font(Font.HELVETICA, 11, Font.NORMAL, Color.BLACK);
                     doc.open();
                     if (!textComponent.getText().equals("")) {
@@ -66,8 +62,8 @@ public class FileManager {
                     e.printStackTrace();
                 }
                 break;
-            default:
-                fileToSave = new File(currentFilePath);
+            default: //Assuming file is txt format
+                currentFilePath = fileToSave.getAbsolutePath();
                 try {
                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileToSave));
                     textComponent.write(bufferedWriter);
@@ -99,8 +95,7 @@ public class FileManager {
         JFileChooser fileChooser = new JFileChooser();
         int fileChooserResult = fileChooser.showOpenDialog(textComponent);
         if (fileChooserResult == JFileChooser.APPROVE_OPTION) {
-            currentFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-            File fileToOpen = new File(currentFilePath);
+            File fileToOpen = fileChooser.getSelectedFile();
             try {
                 //Switch statement used as more file types will be added later
                 switch (FilenameUtils.getExtension(currentFilePath)) {
@@ -123,11 +118,12 @@ public class FileManager {
                     case "rtf":
                         RTFEditorKit rtfParser = new RTFEditorKit();
                         javax.swing.text.Document document = rtfParser.createDefaultDocument();
-                        rtfParser.read(new FileInputStream(currentFilePath), document, 0);
+                        rtfParser.read(new FileInputStream(fileToOpen), document, 0);
                         String text = document.getText(0, document.getLength());
                         textComponent.setText(text);
                         break;
-                    default:
+                    default: //Going to try open up file like a txt file
+                        currentFilePath = fileToOpen.getAbsolutePath();
                         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
                         textComponent.read(bufferedReader, null);
                         bufferedReader.close();
