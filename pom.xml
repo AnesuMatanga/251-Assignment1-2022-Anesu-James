@@ -66,6 +66,13 @@
             <version>1.2.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>3.18.0</version>
+            <type>maven-plugin</type>
+        </dependency>
+
     </dependencies>
 
     <properties>

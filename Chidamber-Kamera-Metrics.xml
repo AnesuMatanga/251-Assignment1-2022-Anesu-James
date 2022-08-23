@@ -1,0 +1,62 @@
+<METRICS profile="Chidamber-Kemerer metrics" timestamp="Wed, 24 Aug 2022 09:30:38 NZST">
+	<METRIC category="Class" name="Coupling between objects" abbreviation="CBO">
+		<VALUE measured="EditorManager" value="1.0"/>
+		<VALUE measured="FileManager" value="2.0"/>
+		<VALUE measured="FileManagerTest" value="1.0"/>
+		<VALUE measured="FontManager" value="1.0"/>
+		<VALUE measured="MainGuiClass" value="5.0"/>
+		<VALUE measured="SearchBoxManager" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="0.0"/>
+		<VALUE measured="TextEditorRunner" value="1.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Depth of inheritance tree" abbreviation="DIT">
+		<VALUE measured="EditorManager" value="1.0"/>
+		<VALUE measured="FileManager" value="1.0"/>
+		<VALUE measured="FileManagerTest" value="1.0"/>
+		<VALUE measured="FontManager" value="1.0"/>
+		<VALUE measured="MainGuiClass" value="6.0"/>
+		<VALUE measured="SearchBoxManager" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="1.0"/>
+		<VALUE measured="TextEditorRunner" value="1.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Lack of Cohesion of Methods" abbreviation="LCOM">
+		<VALUE measured="EditorManager" value="1.0"/>
+		<VALUE measured="FileManager" value="1.0"/>
+		<VALUE measured="FileManagerTest" value="3.0"/>
+		<VALUE measured="FontManager" value="1.0"/>
+		<VALUE measured="MainGuiClass" value="1.0"/>
+		<VALUE measured="SearchBoxManager" value="2.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="5.0"/>
+		<VALUE measured="TextEditorRunner" value="1.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Number of children" abbreviation="NOC">
+		<VALUE measured="EditorManager" value="0.0"/>
+		<VALUE measured="FileManager" value="0.0"/>
+		<VALUE measured="FileManagerTest" value="0.0"/>
+		<VALUE measured="FontManager" value="0.0"/>
+		<VALUE measured="MainGuiClass" value="0.0"/>
+		<VALUE measured="SearchBoxManager" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="0.0"/>
+		<VALUE measured="TextEditorRunner" value="0.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Response for class" abbreviation="RFC">
+		<VALUE measured="EditorManager" value="9.0"/>
+		<VALUE measured="FileManager" value="50.0"/>
+		<VALUE measured="FileManagerTest" value="17.0"/>
+		<VALUE measured="FontManager" value="7.0"/>
+		<VALUE measured="MainGuiClass" value="57.0"/>
+		<VALUE measured="SearchBoxManager" value="22.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="5.0"/>
+		<VALUE measured="TextEditorRunner" value="2.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Weighted method complexity" abbreviation="WMC">
+		<VALUE measured="EditorManager" value="3.0"/>
+		<VALUE measured="FileManager" value="18.0"/>
+		<VALUE measured="FileManagerTest" value="3.0"/>
+		<VALUE measured="FontManager" value="1.0"/>
+		<VALUE measured="MainGuiClass" value="6.0"/>
+		<VALUE measured="SearchBoxManager" value="10.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="5.0"/>
+		<VALUE measured="TextEditorRunner" value="1.0"/>
+	</METRIC>
+</METRICS>
