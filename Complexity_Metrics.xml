@@ -1,0 +1,175 @@
+<METRICS profile="Complexity metrics" timestamp="Wed, 24 Aug 2022 09:13:45 NZST">
+	<METRIC category="Method" name="Cognitive complexity" abbreviation="CogC">
+		<VALUE measured="EditorManager.EditorManager(JTextComponent)" value="0.0"/>
+		<VALUE measured="EditorManager.addDateAndTime()" value="0.0"/>
+		<VALUE measured="EditorManager.delete()" value="0.0"/>
+		<VALUE measured="FileManager.FileManager(JTextComponent)" value="0.0"/>
+		<VALUE measured="FileManager.getCurrentFilePath()" value="0.0"/>
+		<VALUE measured="FileManager.newFile()" value="0.0"/>
+		<VALUE measured="FileManager.open()" value="8.0"/>
+		<VALUE measured="FileManager.print()" value="1.0"/>
+		<VALUE measured="FileManager.save()" value="11.0"/>
+		<VALUE measured="FileManagerTest.newFile()" value="0.0"/>
+		<VALUE measured="FileManagerTest.open()" value="0.0"/>
+		<VALUE measured="FileManagerTest.save()" value="1.0"/>
+		<VALUE measured="FontManager.getConfigProperty(String)" value="1.0"/>
+		<VALUE measured="MainGuiClass.MainGuiClass()" value="7.0"/>
+		<VALUE measured="MainGuiClass.actionPerformed(ActionEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.SearchBoxManager(JTextComponent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.actionPerformed(ActionEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.changeUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.changedUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.insertUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.keepSearching()" value="3.0"/>
+		<VALUE measured="SearchBoxManager.removeUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.startSearch(Document)" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.actionPerformed()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.changeUpdate()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.changedUpdate()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.insertUpdate()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.removeUpdate()" value="0.0"/>
+		<VALUE measured="TextEditorRunner.main(String[])" value="0.0"/>
+		<VALUE measured="stateChanged(ChangeEvent)" value="0.0"/>
+	</METRIC>
+	<METRIC category="Method" name="Essential cyclomatic complexity" abbreviation="ev(G)">
+		<VALUE measured="EditorManager.EditorManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="EditorManager.addDateAndTime()" value="1.0"/>
+		<VALUE measured="EditorManager.delete()" value="1.0"/>
+		<VALUE measured="FileManager.FileManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="FileManager.getCurrentFilePath()" value="1.0"/>
+		<VALUE measured="FileManager.newFile()" value="1.0"/>
+		<VALUE measured="FileManager.open()" value="1.0"/>
+		<VALUE measured="FileManager.print()" value="1.0"/>
+		<VALUE measured="FileManager.save()" value="3.0"/>
+		<VALUE measured="FileManagerTest.newFile()" value="1.0"/>
+		<VALUE measured="FileManagerTest.open()" value="1.0"/>
+		<VALUE measured="FileManagerTest.save()" value="1.0"/>
+		<VALUE measured="FontManager.getConfigProperty(String)" value="1.0"/>
+		<VALUE measured="MainGuiClass.MainGuiClass()" value="3.0"/>
+		<VALUE measured="MainGuiClass.actionPerformed(ActionEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.SearchBoxManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.actionPerformed(ActionEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.changeUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.changedUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.insertUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.keepSearching()" value="1.0"/>
+		<VALUE measured="SearchBoxManager.removeUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.startSearch(Document)" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.actionPerformed()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.changeUpdate()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.changedUpdate()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.insertUpdate()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.removeUpdate()" value="1.0"/>
+		<VALUE measured="TextEditorRunner.main(String[])" value="1.0"/>
+	</METRIC>
+	<METRIC category="Method" name="Design complexity" abbreviation="iv(G)">
+		<VALUE measured="EditorManager.EditorManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="EditorManager.addDateAndTime()" value="1.0"/>
+		<VALUE measured="EditorManager.delete()" value="1.0"/>
+		<VALUE measured="FileManager.FileManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="FileManager.getCurrentFilePath()" value="1.0"/>
+		<VALUE measured="FileManager.newFile()" value="1.0"/>
+		<VALUE measured="FileManager.open()" value="4.0"/>
+		<VALUE measured="FileManager.print()" value="2.0"/>
+		<VALUE measured="FileManager.save()" value="5.0"/>
+		<VALUE measured="FileManagerTest.newFile()" value="1.0"/>
+		<VALUE measured="FileManagerTest.open()" value="1.0"/>
+		<VALUE measured="FileManagerTest.save()" value="2.0"/>
+		<VALUE measured="FontManager.getConfigProperty(String)" value="2.0"/>
+		<VALUE measured="MainGuiClass.MainGuiClass()" value="7.0"/>
+		<VALUE measured="MainGuiClass.actionPerformed(ActionEvent)" value="2.0"/>
+		<VALUE measured="SearchBoxManager.SearchBoxManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.actionPerformed(ActionEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.changeUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.changedUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.insertUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.keepSearching()" value="3.0"/>
+		<VALUE measured="SearchBoxManager.removeUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.startSearch(Document)" value="2.0"/>
+		<VALUE measured="SearchBoxManagerTest.actionPerformed()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.changeUpdate()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.changedUpdate()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.insertUpdate()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.removeUpdate()" value="1.0"/>
+		<VALUE measured="TextEditorRunner.main(String[])" value="1.0"/>
+	</METRIC>
+	<METRIC category="Method" name="Cyclomatic complexity" abbreviation="v(G)">
+		<VALUE measured="EditorManager.EditorManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="EditorManager.addDateAndTime()" value="1.0"/>
+		<VALUE measured="EditorManager.delete()" value="1.0"/>
+		<VALUE measured="FileManager.FileManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="FileManager.getCurrentFilePath()" value="1.0"/>
+		<VALUE measured="FileManager.newFile()" value="1.0"/>
+		<VALUE measured="FileManager.open()" value="7.0"/>
+		<VALUE measured="FileManager.print()" value="2.0"/>
+		<VALUE measured="FileManager.save()" value="8.0"/>
+		<VALUE measured="FileManagerTest.newFile()" value="1.0"/>
+		<VALUE measured="FileManagerTest.open()" value="1.0"/>
+		<VALUE measured="FileManagerTest.save()" value="2.0"/>
+		<VALUE measured="FontManager.getConfigProperty(String)" value="2.0"/>
+		<VALUE measured="MainGuiClass.MainGuiClass()" value="7.0"/>
+		<VALUE measured="MainGuiClass.actionPerformed(ActionEvent)" value="2.0"/>
+		<VALUE measured="SearchBoxManager.SearchBoxManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.actionPerformed(ActionEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.changeUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.changedUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.insertUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.keepSearching()" value="3.0"/>
+		<VALUE measured="SearchBoxManager.removeUpdate(DocumentEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.startSearch(Document)" value="2.0"/>
+		<VALUE measured="SearchBoxManagerTest.actionPerformed()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.changeUpdate()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.changedUpdate()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.insertUpdate()" value="1.0"/>
+		<VALUE measured="SearchBoxManagerTest.removeUpdate()" value="1.0"/>
+		<VALUE measured="TextEditorRunner.main(String[])" value="1.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Average operation complexity" abbreviation="OCavg">
+		<VALUE measured="EditorManager" value="1.0"/>
+		<VALUE measured="FileManager" value="3.0"/>
+		<VALUE measured="FileManagerTest" value="1.0"/>
+		<VALUE measured="FontManager" value="1.0"/>
+		<VALUE measured="MainGuiClass" value="2.0"/>
+		<VALUE measured="SearchBoxManager" value="1.25"/>
+		<VALUE measured="SearchBoxManagerTest" value="1.0"/>
+		<VALUE measured="TextEditorRunner" value="1.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Maximum operation complexity" abbreviation="OCmax">
+		<VALUE measured="EditorManager" value="1.0"/>
+		<VALUE measured="FileManager" value="7.0"/>
+		<VALUE measured="FileManagerTest" value="1.0"/>
+		<VALUE measured="FontManager" value="1.0"/>
+		<VALUE measured="MainGuiClass" value="2.0"/>
+		<VALUE measured="SearchBoxManager" value="3.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="1.0"/>
+		<VALUE measured="TextEditorRunner" value="1.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Weighted method complexity" abbreviation="WMC">
+		<VALUE measured="EditorManager" value="3.0"/>
+		<VALUE measured="FileManager" value="18.0"/>
+		<VALUE measured="FileManagerTest" value="3.0"/>
+		<VALUE measured="FontManager" value="1.0"/>
+		<VALUE measured="MainGuiClass" value="6.0"/>
+		<VALUE measured="SearchBoxManager" value="10.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="5.0"/>
+		<VALUE measured="TextEditorRunner" value="1.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Average cyclomatic complexity" abbreviation="v(G)avg">
+		<VALUE measured="" value="1.896551724137931"/>
+	</METRIC>
+	<METRIC category="Package" name="Total cyclomatic complexity" abbreviation="v(G)tot">
+		<VALUE measured="" value="55.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Average cyclomatic complexity" abbreviation="v(G)avg">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="1.896551724137931"/>
+	</METRIC>
+	<METRIC category="Module" name="Total cyclomatic complexity" abbreviation="v(G)tot">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="55.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Average cyclomatic complexity" abbreviation="v(G)avg">
+		<VALUE measured="project" value="1.896551724137931"/>
+	</METRIC>
+	<METRIC category="Project" name="Total cyclomatic complexity" abbreviation="v(G)tot">
+		<VALUE measured="project" value="55.0"/>
+	</METRIC>
+</METRICS>

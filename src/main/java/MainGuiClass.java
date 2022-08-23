@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.logging.*;
 
 
-public class MainGuiClass extends JFrame implements ActionListener{
+public class MainGuiClass extends JFrame{
     //Initialising Fields
     static JFrame mainFrame;
     static JPanel textPanel;
@@ -27,7 +27,6 @@ public class MainGuiClass extends JFrame implements ActionListener{
     static RTextScrollPane scrollPane;
     static JSpinner fontSizeSpinner;
     static JLabel fontSizeSpinnerLabel;
-    static JButton fontColourButton;
     static JButton dateAndTimeButton;
     //static JButton searchButton;
     static JButton aboutButton;
@@ -73,7 +72,6 @@ public class MainGuiClass extends JFrame implements ActionListener{
         themeMenu = new JMenu("Theme");
         fontSizeSpinner = new JSpinner();
         fontSizeSpinnerLabel = new JLabel("Font:");
-        fontColourButton = new JButton("Colour");
         mainTextArea = new RSyntaxTextArea();
         newItem = new JMenuItem("New");
         openItem = new JMenuItem("Open");
@@ -100,6 +98,14 @@ public class MainGuiClass extends JFrame implements ActionListener{
         //Adding SyntaxConstants (RSyntaxTextArea JAR) to the mainTextArea for highlighting different languages
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
+        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
         mainTextArea.setCodeFoldingEnabled(true);
         mainTextArea.getDocument().addDocumentListener(fileManager.getTextAreaListener());
 
@@ -119,7 +125,6 @@ public class MainGuiClass extends JFrame implements ActionListener{
 
         //Set fontSizeSpinner preferred size from Config.yml File
         fontSizeSpinner.setPreferredSize(new Dimension(50, 25));
-        fontSizeSpinner.setValue(configManager.getConfigProperty("font_size"));
         fontSizeSpinner.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -127,9 +132,10 @@ public class MainGuiClass extends JFrame implements ActionListener{
                         .getFamily(), Font.PLAIN,(int) fontSizeSpinner.getValue()));
             }
         });
+        fontSizeSpinner.setValue(defaultFontSize.getConfigProperty("font_size"));
 
         //Add Action Listener to font colour button
-        fontColourButton.addActionListener(this);
+
 
 
         //Adding ActionListeners to the Menu Items (lambda expression)
@@ -166,7 +172,6 @@ public class MainGuiClass extends JFrame implements ActionListener{
         menuBar.add(editMenu);
         menuBar.add(searchBoxLabel);
         menuBar.add(searchTextField);
-        menuBar.add(fontColourButton);
         menuBar.add(fontSizeSpinnerLabel);
         menuBar.add(fontSizeSpinner);
         menuBar.add(dateAndTimeButton);
@@ -178,19 +183,6 @@ public class MainGuiClass extends JFrame implements ActionListener{
         //mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //check if event is button
-        if(e.getSource()==fontColourButton) {
-            JColorChooser colorChooser = new JColorChooser();
-
-            Color colour = colorChooser.showDialog(null, "Choose a color"
-                    , Color.black);
-
-            mainTextArea.setForeground(colour);
-        }
     }
 }
 

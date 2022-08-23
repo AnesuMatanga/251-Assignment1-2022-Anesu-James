@@ -1,0 +1,319 @@
+<METRICS profile="Lines of code metrics" timestamp="Wed, 24 Aug 2022 09:26:08 NZST">
+	<METRIC category="Method" name="Comment lines of code" abbreviation="CLOC">
+		<VALUE measured="EditorManager.EditorManager(JTextComponent)" value="0.0"/>
+		<VALUE measured="EditorManager.addDateAndTime()" value="3.0"/>
+		<VALUE measured="EditorManager.delete()" value="4.0"/>
+		<VALUE measured="FileManager.FileManager(JTextComponent)" value="3.0"/>
+		<VALUE measured="FileManager.getCurrentFilePath()" value="0.0"/>
+		<VALUE measured="FileManager.newFile()" value="3.0"/>
+		<VALUE measured="FileManager.open()" value="4.0"/>
+		<VALUE measured="FileManager.print()" value="3.0"/>
+		<VALUE measured="FileManager.save()" value="6.0"/>
+		<VALUE measured="FileManagerTest.newFile()" value="0.0"/>
+		<VALUE measured="FileManagerTest.open()" value="0.0"/>
+		<VALUE measured="FileManagerTest.save()" value="0.0"/>
+		<VALUE measured="FontManager.getConfigProperty(String)" value="1.0"/>
+		<VALUE measured="MainGuiClass.MainGuiClass()" value="16.0"/>
+		<VALUE measured="MainGuiClass.actionPerformed(ActionEvent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.SearchBoxManager(JTextComponent)" value="1.0"/>
+		<VALUE measured="SearchBoxManager.actionPerformed(ActionEvent)" value="7.0"/>
+		<VALUE measured="SearchBoxManager.changeUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.changedUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.insertUpdate(DocumentEvent)" value="4.0"/>
+		<VALUE measured="SearchBoxManager.keepSearching()" value="5.0"/>
+		<VALUE measured="SearchBoxManager.removeUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.startSearch(Document)" value="7.0"/>
+		<VALUE measured="SearchBoxManagerTest.actionPerformed()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.changeUpdate()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.changedUpdate()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.insertUpdate()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.removeUpdate()" value="0.0"/>
+		<VALUE measured="TextEditorRunner.main(String[])" value="0.0"/>
+	</METRIC>
+	<METRIC category="Method" name="Javadoc lines of code" abbreviation="JLOC">
+		<VALUE measured="EditorManager.EditorManager(JTextComponent)" value="0.0"/>
+		<VALUE measured="EditorManager.addDateAndTime()" value="3.0"/>
+		<VALUE measured="EditorManager.delete()" value="4.0"/>
+		<VALUE measured="FileManager.FileManager(JTextComponent)" value="4.0"/>
+		<VALUE measured="FileManager.getCurrentFilePath()" value="0.0"/>
+		<VALUE measured="FileManager.newFile()" value="3.0"/>
+		<VALUE measured="FileManager.open()" value="3.0"/>
+		<VALUE measured="FileManager.print()" value="3.0"/>
+		<VALUE measured="FileManager.save()" value="3.0"/>
+		<VALUE measured="FileManagerTest.newFile()" value="0.0"/>
+		<VALUE measured="FileManagerTest.open()" value="0.0"/>
+		<VALUE measured="FileManagerTest.save()" value="0.0"/>
+		<VALUE measured="FontManager.getConfigProperty(String)" value="0.0"/>
+		<VALUE measured="MainGuiClass.MainGuiClass()" value="0.0"/>
+		<VALUE measured="MainGuiClass.actionPerformed(ActionEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.SearchBoxManager(JTextComponent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.actionPerformed(ActionEvent)" value="7.0"/>
+		<VALUE measured="SearchBoxManager.changeUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.changedUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.insertUpdate(DocumentEvent)" value="4.0"/>
+		<VALUE measured="SearchBoxManager.keepSearching()" value="4.0"/>
+		<VALUE measured="SearchBoxManager.removeUpdate(DocumentEvent)" value="0.0"/>
+		<VALUE measured="SearchBoxManager.startSearch(Document)" value="4.0"/>
+		<VALUE measured="SearchBoxManagerTest.actionPerformed()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.changeUpdate()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.changedUpdate()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.insertUpdate()" value="0.0"/>
+		<VALUE measured="SearchBoxManagerTest.removeUpdate()" value="0.0"/>
+		<VALUE measured="TextEditorRunner.main(String[])" value="0.0"/>
+	</METRIC>
+	<METRIC category="Method" name="Lines of code" abbreviation="LOC">
+		<VALUE measured="EditorManager.EditorManager(JTextComponent)" value="3.0"/>
+		<VALUE measured="EditorManager.addDateAndTime()" value="10.0"/>
+		<VALUE measured="EditorManager.delete()" value="7.0"/>
+		<VALUE measured="FileManager.FileManager(JTextComponent)" value="7.0"/>
+		<VALUE measured="FileManager.getCurrentFilePath()" value="3.0"/>
+		<VALUE measured="FileManager.newFile()" value="7.0"/>
+		<VALUE measured="FileManager.open()" value="45.0"/>
+		<VALUE measured="FileManager.print()" value="10.0"/>
+		<VALUE measured="FileManager.save()" value="47.0"/>
+		<VALUE measured="FileManagerTest.newFile()" value="7.0"/>
+		<VALUE measured="FileManagerTest.open()" value="7.0"/>
+		<VALUE measured="FileManagerTest.save()" value="13.0"/>
+		<VALUE measured="FontManager.getConfigProperty(String)" value="15.0"/>
+		<VALUE measured="MainGuiClass.MainGuiClass()" value="124.0"/>
+		<VALUE measured="MainGuiClass.actionPerformed(ActionEvent)" value="10.0"/>
+		<VALUE measured="SearchBoxManager.SearchBoxManager(JTextComponent)" value="4.0"/>
+		<VALUE measured="SearchBoxManager.actionPerformed(ActionEvent)" value="10.0"/>
+		<VALUE measured="SearchBoxManager.changeUpdate(DocumentEvent)" value="3.0"/>
+		<VALUE measured="SearchBoxManager.changedUpdate(DocumentEvent)" value="3.0"/>
+		<VALUE measured="SearchBoxManager.insertUpdate(DocumentEvent)" value="7.0"/>
+		<VALUE measured="SearchBoxManager.keepSearching()" value="14.0"/>
+		<VALUE measured="SearchBoxManager.removeUpdate(DocumentEvent)" value="3.0"/>
+		<VALUE measured="SearchBoxManager.startSearch(Document)" value="19.0"/>
+		<VALUE measured="SearchBoxManagerTest.actionPerformed()" value="3.0"/>
+		<VALUE measured="SearchBoxManagerTest.changeUpdate()" value="3.0"/>
+		<VALUE measured="SearchBoxManagerTest.changedUpdate()" value="3.0"/>
+		<VALUE measured="SearchBoxManagerTest.insertUpdate()" value="3.0"/>
+		<VALUE measured="SearchBoxManagerTest.removeUpdate()" value="3.0"/>
+		<VALUE measured="TextEditorRunner.main(String[])" value="3.0"/>
+	</METRIC>
+	<METRIC category="Method" name="Non-comment lines of code" abbreviation="NCLOC">
+		<VALUE measured="EditorManager.EditorManager(JTextComponent)" value="3.0"/>
+		<VALUE measured="EditorManager.addDateAndTime()" value="7.0"/>
+		<VALUE measured="EditorManager.delete()" value="3.0"/>
+		<VALUE measured="FileManager.FileManager(JTextComponent)" value="3.0"/>
+		<VALUE measured="FileManager.getCurrentFilePath()" value="3.0"/>
+		<VALUE measured="FileManager.newFile()" value="4.0"/>
+		<VALUE measured="FileManager.open()" value="41.0"/>
+		<VALUE measured="FileManager.print()" value="7.0"/>
+		<VALUE measured="FileManager.save()" value="41.0"/>
+		<VALUE measured="FileManagerTest.newFile()" value="7.0"/>
+		<VALUE measured="FileManagerTest.open()" value="7.0"/>
+		<VALUE measured="FileManagerTest.save()" value="13.0"/>
+		<VALUE measured="FontManager.getConfigProperty(String)" value="14.0"/>
+		<VALUE measured="MainGuiClass.MainGuiClass()" value="108.0"/>
+		<VALUE measured="MainGuiClass.actionPerformed(ActionEvent)" value="9.0"/>
+		<VALUE measured="SearchBoxManager.SearchBoxManager(JTextComponent)" value="3.0"/>
+		<VALUE measured="SearchBoxManager.actionPerformed(ActionEvent)" value="3.0"/>
+		<VALUE measured="SearchBoxManager.changeUpdate(DocumentEvent)" value="3.0"/>
+		<VALUE measured="SearchBoxManager.changedUpdate(DocumentEvent)" value="3.0"/>
+		<VALUE measured="SearchBoxManager.insertUpdate(DocumentEvent)" value="3.0"/>
+		<VALUE measured="SearchBoxManager.keepSearching()" value="9.0"/>
+		<VALUE measured="SearchBoxManager.removeUpdate(DocumentEvent)" value="3.0"/>
+		<VALUE measured="SearchBoxManager.startSearch(Document)" value="12.0"/>
+		<VALUE measured="SearchBoxManagerTest.actionPerformed()" value="3.0"/>
+		<VALUE measured="SearchBoxManagerTest.changeUpdate()" value="3.0"/>
+		<VALUE measured="SearchBoxManagerTest.changedUpdate()" value="3.0"/>
+		<VALUE measured="SearchBoxManagerTest.insertUpdate()" value="3.0"/>
+		<VALUE measured="SearchBoxManagerTest.removeUpdate()" value="3.0"/>
+		<VALUE measured="TextEditorRunner.main(String[])" value="3.0"/>
+	</METRIC>
+	<METRIC category="Method" name="Relative lines of code" abbreviation="RLOC">
+		<VALUE measured="EditorManager.EditorManager(JTextComponent)" value="0.13043478260869565"/>
+		<VALUE measured="EditorManager.addDateAndTime()" value="0.43478260869565216"/>
+		<VALUE measured="EditorManager.delete()" value="0.30434782608695654"/>
+		<VALUE measured="FileManager.FileManager(JTextComponent)" value="0.056"/>
+		<VALUE measured="FileManager.getCurrentFilePath()" value="0.024"/>
+		<VALUE measured="FileManager.newFile()" value="0.056"/>
+		<VALUE measured="FileManager.open()" value="0.36"/>
+		<VALUE measured="FileManager.print()" value="0.08"/>
+		<VALUE measured="FileManager.save()" value="0.376"/>
+		<VALUE measured="FileManagerTest.newFile()" value="0.2413793103448276"/>
+		<VALUE measured="FileManagerTest.open()" value="0.2413793103448276"/>
+		<VALUE measured="FileManagerTest.save()" value="0.4482758620689655"/>
+		<VALUE measured="FontManager.getConfigProperty(String)" value="0.8823529411764706"/>
+		<VALUE measured="MainGuiClass.MainGuiClass()" value="0.7898089171974523"/>
+		<VALUE measured="MainGuiClass.actionPerformed(ActionEvent)" value="0.06369426751592357"/>
+		<VALUE measured="SearchBoxManager.SearchBoxManager(JTextComponent)" value="0.058823529411764705"/>
+		<VALUE measured="SearchBoxManager.actionPerformed(ActionEvent)" value="0.14705882352941177"/>
+		<VALUE measured="SearchBoxManager.changeUpdate(DocumentEvent)" value="0.04411764705882353"/>
+		<VALUE measured="SearchBoxManager.changedUpdate(DocumentEvent)" value="0.04411764705882353"/>
+		<VALUE measured="SearchBoxManager.insertUpdate(DocumentEvent)" value="0.10294117647058823"/>
+		<VALUE measured="SearchBoxManager.keepSearching()" value="0.20588235294117646"/>
+		<VALUE measured="SearchBoxManager.removeUpdate(DocumentEvent)" value="0.04411764705882353"/>
+		<VALUE measured="SearchBoxManager.startSearch(Document)" value="0.27941176470588236"/>
+		<VALUE measured="SearchBoxManagerTest.actionPerformed()" value="0.17647058823529413"/>
+		<VALUE measured="SearchBoxManagerTest.changeUpdate()" value="0.17647058823529413"/>
+		<VALUE measured="SearchBoxManagerTest.changedUpdate()" value="0.17647058823529413"/>
+		<VALUE measured="SearchBoxManagerTest.insertUpdate()" value="0.17647058823529413"/>
+		<VALUE measured="SearchBoxManagerTest.removeUpdate()" value="0.17647058823529413"/>
+		<VALUE measured="TextEditorRunner.main(String[])" value="0.6"/>
+	</METRIC>
+	<METRIC category="Class" name="Comment lines of code" abbreviation="CLOC">
+		<VALUE measured="EditorManager" value="7.0"/>
+		<VALUE measured="FileManager" value="22.0"/>
+		<VALUE measured="FileManagerTest" value="0.0"/>
+		<VALUE measured="FontManager" value="1.0"/>
+		<VALUE measured="MainGuiClass" value="19.0"/>
+		<VALUE measured="SearchBoxManager" value="25.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="0.0"/>
+		<VALUE measured="TextEditorRunner" value="0.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Javadoc lines of code" abbreviation="JLOC">
+		<VALUE measured="EditorManager" value="7.0"/>
+		<VALUE measured="FileManager" value="16.0"/>
+		<VALUE measured="FileManagerTest" value="0.0"/>
+		<VALUE measured="FontManager" value="0.0"/>
+		<VALUE measured="MainGuiClass" value="0.0"/>
+		<VALUE measured="SearchBoxManager" value="19.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="0.0"/>
+		<VALUE measured="TextEditorRunner" value="0.0"/>
+	</METRIC>
+	<METRIC category="Class" name="Lines of code" abbreviation="LOC">
+		<VALUE measured="EditorManager" value="23.0"/>
+		<VALUE measured="FileManager" value="125.0"/>
+		<VALUE measured="FileManagerTest" value="29.0"/>
+		<VALUE measured="FontManager" value="17.0"/>
+		<VALUE measured="MainGuiClass" value="157.0"/>
+		<VALUE measured="SearchBoxManager" value="68.0"/>
+		<VALUE measured="SearchBoxManagerTest" value="17.0"/>
+		<VALUE measured="TextEditorRunner" value="5.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Comment lines of code" abbreviation="CLOC">
+		<VALUE measured="" value="0.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Comment lines of code (recursive)" abbreviation="CLOC(rec)">
+		<VALUE measured="" value="32.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Javadoc lines of code" abbreviation="JLOC">
+		<VALUE measured="" value="46.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Javadoc lines of code (recursive)" abbreviation="JLOC(rec)">
+		<VALUE measured="" value="46.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Lines of code" abbreviation="LOC">
+		<VALUE measured="" value="496.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Lines of code (recursive)" abbreviation="LOC(rec)">
+		<VALUE measured="" value="496.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Lines of product code" abbreviation="LOCp">
+		<VALUE measured="" value="442.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Lines of product code (recursive)" abbreviation="LOCp(rec)">
+		<VALUE measured="" value="442.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Lines of test code" abbreviation="LOCt">
+		<VALUE measured="" value="54.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Lines of test code (recursive)" abbreviation="LOCt(rec)">
+		<VALUE measured="" value="54.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Non-comment lines of code" abbreviation="NCLOC">
+		<VALUE measured="" value="464.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Non-comment lines of code (product)" abbreviation="NCLOCp">
+		<VALUE measured="" value="410.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Non-comment lines of code (product, recursive)" abbreviation="NCLOCp(rec)">
+		<VALUE measured="" value="410.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Non-comment lines of code (test)" abbreviation="NCLOCt">
+		<VALUE measured="" value="54.0"/>
+	</METRIC>
+	<METRIC category="Package" name="Non-comment lines of code (test, recursive)" abbreviation="NCLOCt(rec)">
+		<VALUE measured="" value="54.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Javadoc lines of code" abbreviation="JLOC">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="46.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Lines of Groovy" abbreviation="L(Groovy)">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="0.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Lines of HTML" abbreviation="L(HTML)">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="0.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Lines of Java" abbreviation="L(J)">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="496.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Lines of Kotlin" abbreviation="L(KT)">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="0.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Lines of XML" abbreviation="L(XML)">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="85.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Lines of code" abbreviation="LOC">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="754.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Lines of product code" abbreviation="LOCp">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="442.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Lines of test code" abbreviation="LOCt">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="54.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Non-comment lines of code" abbreviation="NCLOC">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="676.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Non-comment lines of code (product)" abbreviation="NCLOCp">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="364.0"/>
+	</METRIC>
+	<METRIC category="Module" name="Non-comment lines of code (test)" abbreviation="NCLOCt">
+		<VALUE measured="251-Assignment1-2022-Anesu-James" value="54.0"/>
+	</METRIC>
+	<METRIC category="FileType" name="Lines of code" abbreviation="LOC">
+		<VALUE measured="Files supported via TextMate bundles" value="161.0"/>
+		<VALUE measured="Java" value="496.0"/>
+		<VALUE measured="Markdown" value="12.0"/>
+		<VALUE measured="XML" value="85.0"/>
+	</METRIC>
+	<METRIC category="FileType" name="Non-comment lines of code" abbreviation="NCLOC">
+		<VALUE measured="Files supported via TextMate bundles" value="161.0"/>
+		<VALUE measured="Java" value="418.0"/>
+		<VALUE measured="Markdown" value="12.0"/>
+		<VALUE measured="XML" value="85.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Comment lines of code" abbreviation="CLOC">
+		<VALUE measured="project" value="78.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Javadoc lines of code" abbreviation="JLOC">
+		<VALUE measured="project" value="46.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Lines of Groovy" abbreviation="L(Groovy)">
+		<VALUE measured="project" value="0.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Lines of HTML" abbreviation="L(HTML)">
+		<VALUE measured="project" value="0.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Lines of Java" abbreviation="L(J)">
+		<VALUE measured="project" value="496.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Lines of Kotlin" abbreviation="L(KT)">
+		<VALUE measured="project" value="0.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Lines of XML" abbreviation="L(XML)">
+		<VALUE measured="project" value="85.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Lines of code" abbreviation="LOC">
+		<VALUE measured="project" value="754.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Lines of product code" abbreviation="LOCp">
+		<VALUE measured="project" value="442.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Lines of test code" abbreviation="LOCt">
+		<VALUE measured="project" value="54.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Non-comment lines of code" abbreviation="NCLOC">
+		<VALUE measured="project" value="676.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Non-comment lines of code (product)" abbreviation="NCLOCp">
+		<VALUE measured="project" value="364.0"/>
+	</METRIC>
+	<METRIC category="Project" name="Non-comment lines of code (test)" abbreviation="NCLOCt">
+		<VALUE measured="project" value="54.0"/>
+	</METRIC>
+</METRICS>
