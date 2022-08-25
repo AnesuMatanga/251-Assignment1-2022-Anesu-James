@@ -101,7 +101,6 @@ public class FileManager {
      * Method will call save method with the saveAs parameter true
      */
     public void saveAs() {
-        if (!this.saveWarning()) return;
         this.save(true);
     }
     /**
