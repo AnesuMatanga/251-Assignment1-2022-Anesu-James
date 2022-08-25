@@ -15,6 +15,7 @@ public class FileManagerTest {
         String textFileContents = "This is what the text file contains\nand this is on the other line";
         JTextArea textComponent = new JTextArea(textFileContents);
         FileManager manager = new FileManager(textComponent);
+        manager.setCurrentFilePath("saveTest.txt");
         manager.save();
         assert(Files.exists(Path.of(manager.getCurrentFilePath())));
         try {
@@ -28,8 +29,13 @@ public class FileManagerTest {
     public void open() {
         JTextArea textComponent = new JTextArea();
         FileManager manager = new FileManager(textComponent);
-        manager.open();
-        System.out.println(textComponent.getText());
+        String testTxt = "This is a test";
+        textComponent.setText(testTxt);
+        manager.setCurrentFilePath("openTest.txt");
+        manager.save();
+        textComponent.setText(null);
+        manager.openCurrent();
+        assertEquals(testTxt, textComponent.getText());
     }
 
     @Test

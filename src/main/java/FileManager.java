@@ -98,50 +98,64 @@ public class FileManager {
     /**
      * Opens the file at currentFilePath and loads it in the textComponent
      */
-    public void open() {
-        JFileChooser fileChooser = new JFileChooser();
-        int fileChooserResult = fileChooser.showOpenDialog(textComponent);
-        if (fileChooserResult == JFileChooser.APPROVE_OPTION) {
-            File fileToOpen = fileChooser.getSelectedFile();
-            try {
-                //Switch statement used as more file types will be added later
-                switch (FilenameUtils.getExtension(fileToOpen.getAbsolutePath())) {
-                    case "odt":
-                        OdfTextDocument odt = OdfTextDocument.loadDocument(fileToOpen);
-                        StringBuilder textFromODT = new StringBuilder();
-
-                        TextPElement currentLine = OdfElement.findFirstChildNode(TextPElement.class, odt.getContentRoot());
-                        textFromODT.append(currentLine.getTextContent());
-                        while (OdfElement.findNextChildNode(TextPElement.class, currentLine) != null) {
-                            textFromODT.append("\n");
-                            currentLine = OdfElement.findNextChildNode(TextPElement.class, currentLine);
-                            textFromODT.append(currentLine.getTextContent());
-                        }
-                        textComponent.setText(textFromODT.toString());
-                        break;
-                    case "pdf":
-                        JOptionPane.showMessageDialog(textComponent, "Sorry Reading from PDFs is not yet" +
-                                " implemented, hopefully will be in the future");
-                        break;
-                    case "rtf":
-                        RTFEditorKit rtfParser = new RTFEditorKit();
-                        javax.swing.text.Document document = rtfParser.createDefaultDocument();
-                        rtfParser.read(new FileInputStream(fileToOpen), document, 0);
-                        String text = document.getText(0, document.getLength());
-                        textComponent.setText(text);
-                        break;
-                    default: //Going to try open up file like a txt file
-                        currentFilePath = fileToOpen.getAbsolutePath();
-                        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
-                        textComponent.read(bufferedReader, null);
-                        bufferedReader.close();
-                        changeSavedSate(true);
-                        break;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+    private void open(Boolean openCurrent) {
+        File fileToOpen;
+        if (!openCurrent) {
+            JFileChooser fileChooser = new JFileChooser();
+            if (fileChooser.showOpenDialog(textComponent) == JFileChooser.APPROVE_OPTION) {
+                fileToOpen = fileChooser.getSelectedFile();
+            } else {
+                return;
             }
+        } else {
+            fileToOpen = new File(currentFilePath);
         }
+        try {
+            //Switch statement used as more file types will be added later
+            switch (FilenameUtils.getExtension(fileToOpen.getAbsolutePath())) {
+                case "odt":
+                    OdfTextDocument odt = OdfTextDocument.loadDocument(fileToOpen);
+                    StringBuilder textFromODT = new StringBuilder();
+
+                    TextPElement currentLine = OdfElement.findFirstChildNode(TextPElement.class, odt.getContentRoot());
+                    textFromODT.append(currentLine.getTextContent());
+                    while (OdfElement.findNextChildNode(TextPElement.class, currentLine) != null) {
+                        textFromODT.append("\n");
+                        currentLine = OdfElement.findNextChildNode(TextPElement.class, currentLine);
+                        textFromODT.append(currentLine.getTextContent());
+                    }
+                    textComponent.setText(textFromODT.toString());
+                    break;
+                case "pdf":
+                    JOptionPane.showMessageDialog(textComponent, "Sorry Reading from PDFs is not yet" +
+                            " implemented, hopefully will be in the future");
+                    break;
+                case "rtf":
+                    RTFEditorKit rtfParser = new RTFEditorKit();
+                    javax.swing.text.Document document = rtfParser.createDefaultDocument();
+                    rtfParser.read(new FileInputStream(fileToOpen), document, 0);
+                    String text = document.getText(0, document.getLength());
+                    textComponent.setText(text);
+                    break;
+                default: //Going to try open up file like a txt file
+                    currentFilePath = fileToOpen.getAbsolutePath();
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
+                    textComponent.read(bufferedReader, null);
+                    bufferedReader.close();
+                    changeSavedSate(true);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void open() {
+        this.open(false);
+    }
+
+    public void openCurrent() {
+        this.open(true);
     }
 
     /**
