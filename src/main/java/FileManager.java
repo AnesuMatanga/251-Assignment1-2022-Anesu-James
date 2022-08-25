@@ -51,34 +51,31 @@ public class FileManager {
         }
         //Switch statement used as more file types will be added in the future. This could later change into
         //a save class or something, but currently it is left as is.
-        switch (FilenameUtils.getExtension(fileToSave.getAbsolutePath())) {
-            case "pdf":
-                try {
-                    Document doc = new Document();
-                    PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(fileToSave));
-                    Font font = new Font(Font.HELVETICA, 11, Font.NORMAL, Color.BLACK);
-                    doc.open();
-                    if (!textComponent.getText().equals("")) {
-                        Paragraph para = new Paragraph(textComponent.getText(), font);
-                        doc.add(para);
-                    }
-                    doc.close();
-                    writer.close();
-                } catch (DocumentException | FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                break;
-            default: //Assuming file is txt format
-                currentFilePath = fileToSave.getAbsolutePath();
-                changeSavedSate(true);
-                try {
+        try {
+            switch (FilenameUtils.getExtension(fileToSave.getAbsolutePath())) {
+                case "pdf":
+                        Document doc = new Document();
+                        PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(fileToSave));
+                        Font font = new Font(Font.HELVETICA, 11, Font.NORMAL, Color.BLACK);
+                        doc.open();
+                        if (!textComponent.getText().equals("")) {
+                            Paragraph para = new Paragraph(textComponent.getText(), font);
+                            doc.add(para);
+                        }
+                        doc.close();
+                        writer.close();
+                    break;
+                default: //Assuming file is txt format
+                    currentFilePath = fileToSave.getAbsolutePath();
                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileToSave));
                     textComponent.write(bufferedWriter);
                     bufferedWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
+                    changeSavedSate(true);
+                    break;
+            }
+        } catch (DocumentException | IOException e ) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong when saving to " + currentFilePath);
         }
     }
 
@@ -147,6 +144,7 @@ public class FileManager {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong when opening " + currentFilePath);
         }
     }
 
@@ -174,6 +172,7 @@ public class FileManager {
             textComponent.print();
         } catch (PrinterException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong with printing");
         }
     }
 
