@@ -128,7 +128,10 @@ public class MainGuiClass extends JFrame{
         });
         fontSizeSpinner.setValue(configManager.getConfigProperty("font_size"));
 
-        //Add Action Listener to font colour button
+        //Set JTextArea font family from ConfigManager
+        Font font = new Font((String) configManager.getConfigProperty("font_family"), Font.BOLD,
+                (Integer) configManager.getConfigProperty("font_size"));
+        mainTextArea.setFont(font);
 
 
 
