@@ -1,3 +1,4 @@
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
@@ -58,6 +59,7 @@ public class SearchBoxManager implements DocumentListener, ActionListener {
             keepSearching();
         } catch (Exception e){
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error when searching please try again.");
         }
     }
 

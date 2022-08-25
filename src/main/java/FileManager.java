@@ -32,6 +32,7 @@ public class FileManager {
     public FileManager(JTextComponent textComponent) {
         this.textComponent = textComponent;
         this.textAreaListener = new TextAreaListener();
+        this.textComponent.getDocument().addDocumentListener(this.getTextAreaListener());
     }
 
     /**
@@ -50,34 +51,31 @@ public class FileManager {
         }
         //Switch statement used as more file types will be added in the future. This could later change into
         //a save class or something, but currently it is left as is.
-        switch (FilenameUtils.getExtension(fileToSave.getAbsolutePath())) {
-            case "pdf":
-                try {
-                    Document doc = new Document();
-                    PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(fileToSave));
-                    Font font = new Font(Font.HELVETICA, 11, Font.NORMAL, Color.BLACK);
-                    doc.open();
-                    if (!textComponent.getText().equals("")) {
-                        Paragraph para = new Paragraph(textComponent.getText(), font);
-                        doc.add(para);
-                    }
-                    doc.close();
-                    writer.close();
-                } catch (DocumentException | FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                break;
-            default: //Assuming file is txt format
-                currentFilePath = fileToSave.getAbsolutePath();
-                changeSavedSate(true);
-                try {
+        try {
+            switch (FilenameUtils.getExtension(fileToSave.getAbsolutePath())) {
+                case "pdf":
+                        Document doc = new Document();
+                        PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(fileToSave));
+                        Font font = new Font(Font.HELVETICA, 11, Font.NORMAL, Color.BLACK);
+                        doc.open();
+                        if (!textComponent.getText().equals("")) {
+                            Paragraph para = new Paragraph(textComponent.getText(), font);
+                            doc.add(para);
+                        }
+                        doc.close();
+                        writer.close();
+                    break;
+                default: //Assuming file is txt format
+                    currentFilePath = fileToSave.getAbsolutePath();
                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileToSave));
                     textComponent.write(bufferedWriter);
                     bufferedWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
+                    changeSavedSate(true);
+                    break;
+            }
+        } catch (DocumentException | IOException e ) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong when saving to " + currentFilePath);
         }
     }
 
@@ -97,50 +95,65 @@ public class FileManager {
     /**
      * Opens the file at currentFilePath and loads it in the textComponent
      */
-    public void open() {
-        JFileChooser fileChooser = new JFileChooser();
-        int fileChooserResult = fileChooser.showOpenDialog(textComponent);
-        if (fileChooserResult == JFileChooser.APPROVE_OPTION) {
-            File fileToOpen = fileChooser.getSelectedFile();
-            try {
-                //Switch statement used as more file types will be added later
-                switch (FilenameUtils.getExtension(fileToOpen.getAbsolutePath())) {
-                    case "odt":
-                        OdfTextDocument odt = OdfTextDocument.loadDocument(fileToOpen);
-                        StringBuilder textFromODT = new StringBuilder();
-
-                        TextPElement currentLine = OdfElement.findFirstChildNode(TextPElement.class, odt.getContentRoot());
-                        textFromODT.append(currentLine.getTextContent());
-                        while (OdfElement.findNextChildNode(TextPElement.class, currentLine) != null) {
-                            textFromODT.append("\n");
-                            currentLine = OdfElement.findNextChildNode(TextPElement.class, currentLine);
-                            textFromODT.append(currentLine.getTextContent());
-                        }
-                        textComponent.setText(textFromODT.toString());
-                        break;
-                    case "pdf":
-                        JOptionPane.showMessageDialog(textComponent, "Sorry Reading from PDFs is not yet" +
-                                " implemented, hopefully will be in the future");
-                        break;
-                    case "rtf":
-                        RTFEditorKit rtfParser = new RTFEditorKit();
-                        javax.swing.text.Document document = rtfParser.createDefaultDocument();
-                        rtfParser.read(new FileInputStream(fileToOpen), document, 0);
-                        String text = document.getText(0, document.getLength());
-                        textComponent.setText(text);
-                        break;
-                    default: //Going to try open up file like a txt file
-                        currentFilePath = fileToOpen.getAbsolutePath();
-                        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
-                        textComponent.read(bufferedReader, null);
-                        bufferedReader.close();
-                        changeSavedSate(true);
-                        break;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+    private void open(Boolean openCurrent) {
+        File fileToOpen;
+        if (!openCurrent) {
+            JFileChooser fileChooser = new JFileChooser();
+            if (fileChooser.showOpenDialog(textComponent) == JFileChooser.APPROVE_OPTION) {
+                fileToOpen = fileChooser.getSelectedFile();
+            } else {
+                return;
             }
+        } else {
+            fileToOpen = new File(currentFilePath);
         }
+        try {
+            //Switch statement used as more file types will be added later
+            switch (FilenameUtils.getExtension(fileToOpen.getAbsolutePath())) {
+                case "odt":
+                    OdfTextDocument odt = OdfTextDocument.loadDocument(fileToOpen);
+                    StringBuilder textFromODT = new StringBuilder();
+
+                    TextPElement currentLine = OdfElement.findFirstChildNode(TextPElement.class, odt.getContentRoot());
+                    textFromODT.append(currentLine.getTextContent());
+                    while (OdfElement.findNextChildNode(TextPElement.class, currentLine) != null) {
+                        textFromODT.append("\n");
+                        currentLine = OdfElement.findNextChildNode(TextPElement.class, currentLine);
+                        textFromODT.append(currentLine.getTextContent());
+                    }
+                    textComponent.setText(textFromODT.toString());
+                    break;
+                case "pdf":
+                    JOptionPane.showMessageDialog(textComponent, "Sorry Reading from PDFs is not yet" +
+                            " implemented, hopefully will be in the future");
+                    break;
+                case "rtf":
+                    RTFEditorKit rtfParser = new RTFEditorKit();
+                    javax.swing.text.Document document = rtfParser.createDefaultDocument();
+                    rtfParser.read(new FileInputStream(fileToOpen), document, 0);
+                    String text = document.getText(0, document.getLength());
+                    textComponent.setText(text);
+                    break;
+                default: //Going to try open up file like a txt file
+                    currentFilePath = fileToOpen.getAbsolutePath();
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(fileToOpen));
+                    textComponent.read(bufferedReader, null);
+                    bufferedReader.close();
+                    changeSavedSate(true);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong when opening " + currentFilePath);
+        }
+    }
+
+    public void open() {
+        this.open(false);
+    }
+
+    public void openCurrent() {
+        this.open(true);
     }
 
     /**
@@ -159,16 +172,24 @@ public class FileManager {
             textComponent.print();
         } catch (PrinterException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong with printing");
         }
     }
 
     public String getCurrentFilePath() {
         return currentFilePath;
     }
+    public void setCurrentFilePath(String currentFilePath) {
+        this.currentFilePath = currentFilePath;
+    }
 
     private void changeSavedSate(Boolean newSavedState) {
         if (isSaved == newSavedState) return;
         else isSaved = newSavedState;
+        if (currentFilePath == null) {
+            setTitle(null);
+            return;
+        }
         if (isSaved) {
             setTitle(new File(currentFilePath).getName());
         } else {
@@ -220,5 +241,9 @@ public class FileManager {
 
     public TextAreaListener getTextAreaListener() {
         return textAreaListener;
+    }
+
+    public Boolean getIsSaved() {
+        return this.isSaved;
     }
 }

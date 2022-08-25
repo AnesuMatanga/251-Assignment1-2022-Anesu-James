@@ -1,5 +1,6 @@
 import org.yaml.snakeyaml.Yaml;
 
+import javax.swing.*;
 import java.io.File;
 
 import java.io.FileInputStream;
@@ -18,6 +19,7 @@ public class ConfigManager {
                 inputStream = new FileInputStream("config.yml");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error when reading from config.yml file.");
             }
         }
 

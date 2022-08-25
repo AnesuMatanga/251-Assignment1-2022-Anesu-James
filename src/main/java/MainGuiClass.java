@@ -54,14 +54,9 @@ public class MainGuiClass extends JFrame{
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(MainGuiClass.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error when setting up JFrame look and feel");
         }
 
         //Creating GUI Objects
@@ -107,7 +102,6 @@ public class MainGuiClass extends JFrame{
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
         mainTextArea.setCodeFoldingEnabled(true);
-        mainTextArea.getDocument().addDocumentListener(fileManager.getTextAreaListener());
 
         //Adding menu Items to menu
         fileMenu.add(newItem);
