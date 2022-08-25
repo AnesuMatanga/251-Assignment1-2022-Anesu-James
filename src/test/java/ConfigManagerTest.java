@@ -14,7 +14,7 @@ public class ConfigManagerTest {
     @Test
     public void checkConfigProperty() {
         ConfigManager fontFamily = new ConfigManager();
-        assertEquals("sans_serif", fontFamily.getConfigProperty("font_family"));
+        assertEquals("Monospaced", fontFamily.getConfigProperty("font_family"));
         assertNull(fontFamily.getConfigProperty("config_setting_doesn't_exist"));
     }
 }
