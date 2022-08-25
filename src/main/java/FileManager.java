@@ -187,6 +187,10 @@ public class FileManager {
     private void changeSavedSate(Boolean newSavedState) {
         if (isSaved == newSavedState) return;
         else isSaved = newSavedState;
+        if (currentFilePath == null) {
+            setTitle(null);
+            return;
+        }
         if (isSaved) {
             setTitle(new File(currentFilePath).getName());
         } else {
