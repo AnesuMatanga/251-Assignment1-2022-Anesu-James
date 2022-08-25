@@ -32,6 +32,7 @@ public class FileManager {
     public FileManager(JTextComponent textComponent) {
         this.textComponent = textComponent;
         this.textAreaListener = new TextAreaListener();
+        this.textComponent.getDocument().addDocumentListener(this.getTextAreaListener());
     }
 
     /**

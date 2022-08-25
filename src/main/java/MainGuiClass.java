@@ -107,7 +107,6 @@ public class MainGuiClass extends JFrame{
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
         mainTextArea.setCodeFoldingEnabled(true);
-        mainTextArea.getDocument().addDocumentListener(fileManager.getTextAreaListener());
 
         //Adding menu Items to menu
         fileMenu.add(newItem);

@@ -49,7 +49,7 @@ public class FileManagerTest {
         assertEquals(false, manager.getIsSaved());
         manager.save();
         assertEquals(true, manager.getIsSaved());
-        textComponent.setText("Changing the test should fire a action that makes it not saved");
+        textComponent.append("Changing the test should fire a action that makes it not saved");
         assertEquals(false, manager.getIsSaved());
         try {
             Files.delete(Path.of(fileName));
