@@ -90,6 +90,7 @@ public class FileManager {
      * Method will call save method with the saveAs parameter true
      */
     public void saveAs() {
+        if (!this.saveWarning()) return;
         this.save(true);
     }
     /**
@@ -97,6 +98,8 @@ public class FileManager {
      */
     private void open(Boolean openCurrent) {
         File fileToOpen;
+        //Check if file needs to be saved
+        if (!this.saveWarning()) return;
         if (!openCurrent) {
             JFileChooser fileChooser = new JFileChooser();
             if (fileChooser.showOpenDialog(textComponent) == JFileChooser.APPROVE_OPTION) {
@@ -160,6 +163,7 @@ public class FileManager {
      * Clears the text area and puts the fileManager into a clean state.
      */
     public void newFile() {
+        if (!this.saveWarning()) return;
         currentFilePath = null;
         textComponent.setText(null);
     }
@@ -184,8 +188,7 @@ public class FileManager {
     }
 
     private void changeSavedSate(Boolean newSavedState) {
-        if (isSaved == newSavedState) return;
-        else isSaved = newSavedState;
+        isSaved = newSavedState;
         if (currentFilePath == null) {
             setTitle(null);
             return;
@@ -199,6 +202,26 @@ public class FileManager {
 
     private void setTitle(String title) {
         textComponent.setBorder(BorderFactory.createTitledBorder(title));
+    }
+
+    /**
+     * Checks to see if the current file is saved. If it isn't it will prompt the user if they want to save before continuing
+     * @return whether the action should be continued or not.
+     */
+    private boolean saveWarning() {
+        if (currentFilePath != null && !this.getIsSaved()) {
+            int response = JOptionPane.showConfirmDialog(textComponent, "Your current file is unsaved. Would you like to save it before continuing?");
+            switch (response) {
+                case JOptionPane.YES_OPTION:
+                    this.save();
+                    break;
+                case JOptionPane.NO_OPTION:
+                    break;
+                default:
+                    return false;
+            }
+        }
+        return true;
     }
 
 
