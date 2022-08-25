@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EditorManagerTest {
+public class EditorManagerTest {
 
     @Test
-    void delete() {
+    public void delete() {
         JTextComponent textArea = new JTextArea();
         EditorManager editorManager = new EditorManager(textArea);
         textArea.setText("This is a test of the delete method.");
@@ -22,7 +22,7 @@ class EditorManagerTest {
     }
 
     @Test
-    void addDateAndTime() {
+    public void addDateAndTime() {
         JTextComponent textArea = new JTextArea();
         EditorManager editorManager = new EditorManager(textArea);
         textArea.setText("This is a test of the addDate and time method.");

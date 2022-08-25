@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -7,10 +7,10 @@ import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileManagerTest {
+public class FileManagerTest {
 
-    @org.junit.jupiter.api.Test
-    void save() {
+    @Test
+    public void save() {
         String textFileContents = "This is what the text file contains\nand this is on the other line";
         JTextArea textComponent = new JTextArea(textFileContents);
         FileManager manager = new FileManager(textComponent);
@@ -23,16 +23,16 @@ class FileManagerTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
-    void open() {
+    @Test
+    public void open() {
         JTextArea textComponent = new JTextArea();
         FileManager manager = new FileManager(textComponent);
         manager.open();
         System.out.println(textComponent.getText());
     }
 
-    @org.junit.jupiter.api.Test
-    void newFile() {
+    @Test
+    public void newFile() {
         JTextArea textComponent = new JTextArea("This text area has some text");
         FileManager manager = new FileManager(textComponent);
         manager.newFile();
