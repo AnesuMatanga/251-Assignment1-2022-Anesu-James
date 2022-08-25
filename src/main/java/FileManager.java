@@ -165,6 +165,9 @@ public class FileManager {
     public String getCurrentFilePath() {
         return currentFilePath;
     }
+    public void setCurrentFilePath(String currentFilePath) {
+        this.currentFilePath = currentFilePath;
+    }
 
     private void changeSavedSate(Boolean newSavedState) {
         if (isSaved == newSavedState) return;
@@ -220,5 +223,9 @@ public class FileManager {
 
     public TextAreaListener getTextAreaListener() {
         return textAreaListener;
+    }
+
+    public Boolean getIsSaved() {
+        return this.isSaved;
     }
 }

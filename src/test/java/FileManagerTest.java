@@ -1,3 +1,4 @@
+import net.sf.saxon.style.SaxonImportQuery;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -37,5 +38,34 @@ public class FileManagerTest {
         FileManager manager = new FileManager(textComponent);
         manager.newFile();
         assertEquals("", textComponent.getText());
+    }
+
+    @Test
+    public void changeSavedState() {
+        JTextArea textComponent = new JTextArea("This text area has some text");
+        FileManager manager = new FileManager(textComponent);
+        String fileName = "changeSavedStateTest.txt";
+        manager.setCurrentFilePath(fileName);
+        assertEquals(false, manager.getIsSaved());
+        manager.save();
+        assertEquals(true, manager.getIsSaved());
+        textComponent.setText("Changing the test should fire a action that makes it not saved");
+        assertEquals(false, manager.getIsSaved());
+        try {
+            Files.delete(Path.of(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void setTitle() {
+        JTextArea textComponent = new JTextArea("This text area has some text");
+        FileManager manager = new FileManager(textComponent);
+        String fileName = "setTitleTest";
+        manager.setCurrentFilePath(fileName);
+        manager.save();
+        assertEquals(BorderFactory.createTitledBorder(fileName).getClass(), textComponent.getBorder().getClass());
     }
 }
