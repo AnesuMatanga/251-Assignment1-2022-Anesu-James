@@ -22,7 +22,7 @@ import java.io.*;
 public class FileManager {
     //File path should always be kept in absolute form
     private String currentFilePath = null;
-    private boolean isSaved = false;
+    private boolean isSaved = true;
     //Text component that will be saved from and written to.
     private final JTextComponent textComponent;
     private final TextAreaListener textAreaListener;
@@ -35,12 +35,11 @@ public class FileManager {
         this.textComponent = textComponent;
         this.textAreaListener = new TextAreaListener();
         this.textComponent.getDocument().addDocumentListener(this.getTextAreaListener());
-
-
+        this.newFile();
     }
 
     /**
-     * Method that loads the window listner for the frame to do on close save warning.
+     * Method that loads the window listener for the frame to do on close save warning.
      */
     public void setFrame() {
         JFrame frame = (JFrame) SwingUtilities.windowForComponent(textComponent);
@@ -178,6 +177,7 @@ public class FileManager {
         if (!this.saveWarning()) return;
         currentFilePath = null;
         textComponent.setText(null);
+        changeSavedSate(true);
     }
 
     /**
@@ -201,14 +201,11 @@ public class FileManager {
 
     private void changeSavedSate(Boolean newSavedState) {
         isSaved = newSavedState;
-        if (currentFilePath == null) {
-            setTitle(null);
-            return;
-        }
+        String newTitle = currentFilePath == null ? "untitled" : new File(currentFilePath).getName();
         if (isSaved) {
-            setTitle(new File(currentFilePath).getName());
+            setTitle(newTitle);
         } else {
-            setTitle(new File(currentFilePath).getName() + " *");
+            setTitle(newTitle + " *");
         }
     }
 
@@ -221,7 +218,7 @@ public class FileManager {
      * @return whether the action should be continued or not.
      */
     private boolean saveWarning() {
-        if (currentFilePath != null && !this.getIsSaved()) {
+        if (!this.getIsSaved()) {
             int response = JOptionPane.showConfirmDialog(textComponent, "Your current file is unsaved. Would you like to save it before continuing?");
             switch (response) {
                 case JOptionPane.YES_OPTION:
@@ -366,6 +363,7 @@ public class FileManager {
 
         }
     }
+
     public TextAreaListener getTextAreaListener() {
         return textAreaListener;
     }
