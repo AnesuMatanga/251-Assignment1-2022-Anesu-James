@@ -30,12 +30,19 @@ public class FileManagerTest {
         JTextArea textComponent = new JTextArea();
         FileManager manager = new FileManager(textComponent);
         String testTxt = "This is a test";
+        String fileName = "openTest.txt";
         textComponent.setText(testTxt);
-        manager.setCurrentFilePath("openTest.txt");
+        manager.setCurrentFilePath(fileName);
         manager.save();
         textComponent.setText(null);
         manager.openCurrent();
         assertEquals(testTxt, textComponent.getText());
+        try {
+            Files.delete(Path.of(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 
     @Test
@@ -73,5 +80,11 @@ public class FileManagerTest {
         manager.setCurrentFilePath(fileName);
         manager.save();
         assertEquals(BorderFactory.createTitledBorder(fileName).getClass(), textComponent.getBorder().getClass());
+        try {
+            Files.delete(Path.of(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 }
