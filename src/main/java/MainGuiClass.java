@@ -6,14 +6,10 @@
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.logging.*;
 
 
 public class MainGuiClass extends JFrame{
@@ -35,10 +31,10 @@ public class MainGuiClass extends JFrame{
     static JLabel searchBoxLabel;
 
 
-    private FileManager fileManager;
-    private EditorManager editorManager;
-    private SearchBoxManager searchBoxManager;
-    private ConfigManager configManager;
+    private final FileManager fileManager;
+    private final EditorManager editorManager;
+    private final SearchBoxManager searchBoxManager;
+    private final ConfigManager configManager;
 
 
     //Constructor
@@ -120,13 +116,8 @@ public class MainGuiClass extends JFrame{
 
         //Set fontSizeSpinner preferred size from Config.yml File
         fontSizeSpinner.setPreferredSize(new Dimension(50, 25));
-        fontSizeSpinner.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                mainTextArea.setFont(new Font(mainTextArea.getFont()
-                        .getFamily(), Font.PLAIN,(int) fontSizeSpinner.getValue()));
-            }
-        });
+        fontSizeSpinner.addChangeListener(e -> mainTextArea.setFont(new Font(mainTextArea.getFont()
+                .getFamily(), Font.PLAIN,(int) fontSizeSpinner.getValue())));
         fontSizeSpinner.setValue(configManager.getConfigProperty("font_size"));
 
         //Set JTextArea font family from ConfigManager
@@ -154,12 +145,8 @@ public class MainGuiClass extends JFrame{
         //Adding ActionListener to date and time button
         dateAndTimeButton.addActionListener(e -> editorManager.addDateAndTime());
 
-        aboutButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
-                    "Made by Anesu and James for assignment 1 of 159251 Semester 2 2022.\n" +
-                    "Search feature: Just start typing and it will search the current document for that text." +
-                    " Pressing Enter will cycle through the found occurrences of the search string.\n");
-        });
+        aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
+                "Made by Anesu and James for assignment 1 of 159251 Semester 2 2022."));
 
         //Adding DocumentListener and ActionListener to JTextField
         searchTextField.getDocument().addDocumentListener(searchBoxManager);
