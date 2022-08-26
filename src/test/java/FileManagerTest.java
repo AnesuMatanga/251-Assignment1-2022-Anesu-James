@@ -34,7 +34,6 @@ public class FileManagerTest {
         textComponent.setText(testTxt);
         manager.setCurrentFilePath(fileName);
         manager.save();
-        textComponent.setText(null);
         manager.openCurrent();
         assertEquals(testTxt, textComponent.getText());
         try {
@@ -59,11 +58,12 @@ public class FileManagerTest {
         FileManager manager = new FileManager(textComponent);
         String fileName = "changeSavedStateTest.txt";
         manager.setCurrentFilePath(fileName);
-        assertEquals(false, manager.getIsSaved());
         manager.save();
         assertEquals(true, manager.getIsSaved());
         textComponent.append("Changing the test should fire a action that makes it not saved");
         assertEquals(false, manager.getIsSaved());
+        manager.save();
+        assertEquals(true, manager.getIsSaved());
         try {
             Files.delete(Path.of(fileName));
         } catch (IOException e) {

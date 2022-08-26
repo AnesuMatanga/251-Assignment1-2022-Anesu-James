@@ -12,6 +12,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.logging.*;
 
 
@@ -141,7 +142,7 @@ public class MainGuiClass extends JFrame{
         saveItem.addActionListener(e -> fileManager.save());
         saveAsItem.addActionListener(e -> fileManager.saveAs());
         printItem.addActionListener(e -> fileManager.print());
-        exitItem.addActionListener(e -> mainFrame.dispose());
+        exitItem.addActionListener(e -> mainFrame.dispatchEvent(new WindowEvent(mainFrame, WindowEvent.WINDOW_CLOSING)));
 
 
         //Adding ActionListeners to Edit Menu Items
@@ -176,9 +177,10 @@ public class MainGuiClass extends JFrame{
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
         mainFrame.add(scrollPane);
+        fileManager.setFrame();
         mainFrame.setSize(600, 600);
         //mainFrame.setLocationRelativeTo(null);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         mainFrame.setVisible(true);
     }
 }
