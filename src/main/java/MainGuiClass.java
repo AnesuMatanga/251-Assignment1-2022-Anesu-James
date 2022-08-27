@@ -9,6 +9,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowEvent;
 
 
@@ -29,6 +30,7 @@ public class MainGuiClass extends JFrame{
     static JButton aboutButton;
     static JTextField searchTextField;
     static JLabel searchBoxLabel;
+    static JCheckBox checkBox;
 
 
     private final FileManager fileManager;
@@ -75,6 +77,7 @@ public class MainGuiClass extends JFrame{
         copyEditItem = new JMenuItem("Copy");
         pasteEditItem = new JMenuItem("Paste");
         deleteEditItem = new JMenuItem("Delete");
+        checkBox = new JCheckBox("Highlighter");
 
         dateAndTimeButton = new JButton("Add Date & Time");
         aboutButton = new JButton("About");
@@ -87,18 +90,18 @@ public class MainGuiClass extends JFrame{
         searchBoxManager = new SearchBoxManager(mainTextArea);
         configManager = new ConfigManager();
 
-        //Adding SyntaxConstants (RSyntaxTextArea JAR) to the mainTextArea for highlighting different languages
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
-        mainTextArea.setCodeFoldingEnabled(true);
+        mainTextArea.setAutoIndentEnabled(false);
+        mainTextArea.setCodeFoldingEnabled(false);
+        /**
+         * Adding a checkbox for the user to choose if they want the syntax Highlighter in
+         * their text or not.
+         * The File extension is taken from the open method in FileManager.java by a static
+         * variable called extension which is then called here.
+         */
+        checkBox.addItemListener(e -> {
+            fileManager.setCodeFormatting(checkBox.isSelected());
+            fileManager.updateCodeFormatting();
+        });
 
         //Adding menu Items to menu
         fileMenu.add(newItem);
@@ -124,8 +127,6 @@ public class MainGuiClass extends JFrame{
         Font font = new Font((String) configManager.getConfigProperty("font_family"), Font.BOLD,
                 (Integer) configManager.getConfigProperty("font_size"));
         mainTextArea.setFont(font);
-
-
 
         //Adding ActionListeners to the Menu Items (lambda expression)
         newItem.addActionListener(e -> fileManager.newFile());
@@ -159,6 +160,7 @@ public class MainGuiClass extends JFrame{
         menuBar.add(searchTextField);
         menuBar.add(fontSizeSpinnerLabel);
         menuBar.add(fontSizeSpinner);
+        menuBar.add(checkBox);
         menuBar.add(dateAndTimeButton);
         menuBar.add(aboutButton);
         //Adding the menuPanel and the textPanel to the mainFrame

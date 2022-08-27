@@ -4,6 +4,8 @@ import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import org.apache.commons.io.FilenameUtils;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -27,11 +29,14 @@ public class FileManager {
     private final JTextComponent textComponent;
     private final TextAreaListener textAreaListener;
 
+    private boolean codeFormatting = false;
+
+
     /**
      * Constructor to load the field
      * @param textComponent The component where files will be saved and written to
      */
-    public FileManager(JTextComponent textComponent) {
+    public FileManager(RSyntaxTextArea textComponent) {
         this.textComponent = textComponent;
         this.textAreaListener = new TextAreaListener();
         this.textComponent.getDocument().addDocumentListener(this.getTextAreaListener());
@@ -88,6 +93,7 @@ public class FileManager {
             e.printStackTrace();
             JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong when saving to " + currentFilePath);
         }
+        updateCodeFormatting();
     }
 
     /**
@@ -159,6 +165,7 @@ public class FileManager {
             e.printStackTrace();
             JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong when opening " + currentFilePath);
         }
+        updateCodeFormatting();
     }
 
     public void open() {
@@ -369,5 +376,67 @@ public class FileManager {
 
     public Boolean getIsSaved() {
         return this.isSaved;
+    }
+
+    public String getExtension() {
+        if (currentFilePath == null) return "";
+        else return FilenameUtils.getExtension(currentFilePath);
+    }
+
+    public void setCodeFormatting(boolean codeFormatting) {
+        this.codeFormatting = codeFormatting;
+    }
+
+    public void updateCodeFormatting() {
+        RSyntaxTextArea textArea = (RSyntaxTextArea) textComponent;
+        if (codeFormatting) {
+            String syntax;
+            switch (getExtension()) {
+                case "cpp":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS;
+                    break;
+                case "java":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_JAVA;
+                    break;
+                case "css":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_CSS;
+                    break;
+                case "html":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_HTML;
+                    break;
+                case "xml":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_XML;
+                    break;
+                case "js":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT;
+                    break;
+                case "spl":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_SQL;
+                    break;
+                case "c":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_C;
+                    break;
+                case "py":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_PYTHON;
+                    break;
+                case "yml":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_YAML;
+                    break;
+                default:
+                    syntax = SyntaxConstants.SYNTAX_STYLE_NONE;
+            }
+                textArea.setSyntaxEditingStyle(syntax);
+                if (syntax.equals(SyntaxConstants.SYNTAX_STYLE_NONE)) {
+                    textArea.setAutoIndentEnabled(false);
+                    textArea.setCodeFoldingEnabled(false);
+                } else {
+                    textArea.setAutoIndentEnabled(true);
+                    textArea.setCodeFoldingEnabled(true);
+                }
+            } else {
+                textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
+                textArea.setAutoIndentEnabled(false);
+                textArea.setCodeFoldingEnabled(false);
+        }
     }
 }
