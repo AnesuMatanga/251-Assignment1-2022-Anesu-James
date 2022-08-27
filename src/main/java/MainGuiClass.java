@@ -104,36 +104,36 @@ public class MainGuiClass extends JFrame{
             if (e.getStateChange() == ItemEvent.SELECTED && checkBox.isSelected()) {
                 //DEBUG
                 //System.out.println("Outside");
-                if(FileManager.extension.equals("cpp")) {
+                if(fileManager.getExtension().equals("cpp")) {
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
                 }
-                if (FileManager.extension.equals("java")) {
+                if (fileManager.getExtension().equals("java")) {
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
                 }
-                if(FileManager.extension.equals("css")) {
+                if(fileManager.getExtension().equals("css")) {
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
                 }
-                if (FileManager.extension.equals("html")) {
+                if (fileManager.getExtension().equals("html")) {
                     //DEBUG
                     System.out.println("html");
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
                 }
-                if(FileManager.extension.equals("xml")) {
+                if(fileManager.getExtension().equals("xml")) {
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
                 }
-                if (FileManager.extension.equals("js")) {
+                if (fileManager.getExtension().equals("js")) {
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
                 }
-                if(FileManager.extension.equals("sql")) {
+                if(fileManager.getExtension().equals("sql")) {
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
                 }
-                if (FileManager.extension.equals("c")) {
+                if (fileManager.getExtension().equals("c")) {
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
                 }
-                if(FileManager.extension.equals("py")) {
+                if(fileManager.getExtension().equals("py")) {
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
                 }
-                if (FileManager.extension.equals("yml")) {
+                if (fileManager.getExtension().equals("yml")) {
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
                 }
                 mainTextArea.setAutoIndentEnabled(true);
@@ -144,7 +144,6 @@ public class MainGuiClass extends JFrame{
                 mainTextArea.setAutoIndentEnabled(false);
                 mainTextArea.setCodeFoldingEnabled(false);
             }
-
         });
 
         //Adding menu Items to menu
