@@ -93,6 +93,7 @@ public class MainGuiClass extends JFrame{
         configManager = new ConfigManager();
 
         mainTextArea.setAutoIndentEnabled(false);
+        mainTextArea.setCodeFoldingEnabled(false);
         /**
          * Adding a checkbox for the user to choose if they want the syntax Highlighter in
          * their text or not.
@@ -136,10 +137,12 @@ public class MainGuiClass extends JFrame{
                     mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
                 }
                 mainTextArea.setAutoIndentEnabled(true);
+                mainTextArea.setCodeFoldingEnabled(true);
             }
             else {
                 mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
                 mainTextArea.setAutoIndentEnabled(false);
+                mainTextArea.setCodeFoldingEnabled(false);
             }
 
         });
