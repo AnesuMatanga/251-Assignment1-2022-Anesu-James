@@ -26,6 +26,7 @@ public class FileManager {
     //Text component that will be saved from and written to.
     private final JTextComponent textComponent;
     private final TextAreaListener textAreaListener;
+    public static String extension="";
 
     /**
      * Constructor to load the field
@@ -121,6 +122,7 @@ public class FileManager {
             fileToOpen = new File(currentFilePath);
         }
         try {
+            extension = FilenameUtils.getExtension(fileToOpen.getAbsolutePath());
             //Switch statement used as more file types will be added later
             switch (FilenameUtils.getExtension(fileToOpen.getAbsolutePath())) {
                 case "odt":
