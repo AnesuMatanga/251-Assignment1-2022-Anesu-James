@@ -6,12 +6,13 @@
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.logging.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.WindowEvent;
 
 
 public class MainGuiClass extends JFrame{
@@ -91,69 +92,56 @@ public class MainGuiClass extends JFrame{
         searchBoxManager = new SearchBoxManager(mainTextArea);
         configManager = new ConfigManager();
 
-        //Adding SyntaxConstants (RSyntaxTextArea JAR) to the mainTextArea for highlighting different languages
-        //checkBox.setSelected(true);
-      /*  mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
-        mainTextArea.setCodeFoldingEnabled(true); */
-
+        mainTextArea.setAutoIndentEnabled(false);
         /**
          * Adding a checkbox for the user to choose if they want the syntax Highlighter in
          * their text or not.
          * The File extension is taken from the open method in FileManager.java by a static
          * variable called extension which is then called here.
          */
-        checkBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == 1 && checkBox.isSelected()) {
+        checkBox.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED && checkBox.isSelected()) {
+                //DEBUG
+                //System.out.println("Outside");
+                if(FileManager.extension.equals("cpp")) {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
+                }
+                if (FileManager.extension.equals("java")) {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+                }
+                if(FileManager.extension.equals("css")) {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
+                }
+                if (FileManager.extension.equals("html")) {
                     //DEBUG
-                    //System.out.println("Outside");
-                    if(FileManager.extension.equals("cpp")) {
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
-                    }
-                    if (FileManager.extension.equals("java")) {
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-                    }
-                    if(FileManager.extension.equals("css")) {
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
-                    }
-                    if (FileManager.extension.equals("html")) {
-                        //DEBUG
-                        System.out.println("html");
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
-                    }
-                    if(FileManager.extension.equals("xml")) {
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
-                    }
-                    if (FileManager.extension.equals("js")) {
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
-                    }
-                    if(FileManager.extension.equals("sql")) {
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
-                    }
-                    if (FileManager.extension.equals("c")) {
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
-                    }
-                    if(FileManager.extension.equals("py")) {
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
-                    }
-                    if (FileManager.extension.equals("yml")) {
-                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
-                    }
+                    System.out.println("html");
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
                 }
-                else {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
+                if(FileManager.extension.equals("xml")) {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
                 }
+                if (FileManager.extension.equals("js")) {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
+                }
+                if(FileManager.extension.equals("sql")) {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
+                }
+                if (FileManager.extension.equals("c")) {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
+                }
+                if(FileManager.extension.equals("py")) {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
+                }
+                if (FileManager.extension.equals("yml")) {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
+                }
+                mainTextArea.setAutoIndentEnabled(true);
             }
+            else {
+                mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
+                mainTextArea.setAutoIndentEnabled(false);
+            }
+
         });
 
         //Adding menu Items to menu
@@ -172,13 +160,8 @@ public class MainGuiClass extends JFrame{
 
         //Set fontSizeSpinner preferred size from Config.yml File
         fontSizeSpinner.setPreferredSize(new Dimension(50, 25));
-        fontSizeSpinner.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                mainTextArea.setFont(new Font(mainTextArea.getFont()
-                        .getFamily(), Font.PLAIN,(int) fontSizeSpinner.getValue()));
-            }
-        });
+        fontSizeSpinner.addChangeListener(e -> mainTextArea.setFont(new Font(mainTextArea.getFont()
+                .getFamily(), Font.PLAIN,(int) fontSizeSpinner.getValue())));
         fontSizeSpinner.setValue(configManager.getConfigProperty("font_size"));
 
         //Set JTextArea font family from ConfigManager
