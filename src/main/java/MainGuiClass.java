@@ -6,14 +6,13 @@
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowEvent;
-import java.util.logging.*;
 
 
 public class MainGuiClass extends JFrame{
@@ -33,6 +32,7 @@ public class MainGuiClass extends JFrame{
     static JButton aboutButton;
     static JTextField searchTextField;
     static JLabel searchBoxLabel;
+    static JCheckBox checkBox;
 
 
     private FileManager fileManager;
@@ -79,6 +79,7 @@ public class MainGuiClass extends JFrame{
         copyEditItem = new JMenuItem("Copy");
         pasteEditItem = new JMenuItem("Paste");
         deleteEditItem = new JMenuItem("Delete");
+        checkBox = new JCheckBox("Highlighter");
 
         dateAndTimeButton = new JButton("Add Date & Time");
         aboutButton = new JButton("About");
@@ -91,18 +92,18 @@ public class MainGuiClass extends JFrame{
         searchBoxManager = new SearchBoxManager(mainTextArea);
         configManager = new ConfigManager();
 
-        //Adding SyntaxConstants (RSyntaxTextArea JAR) to the mainTextArea for highlighting different languages
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
-        mainTextArea.setCodeFoldingEnabled(true);
+        mainTextArea.setAutoIndentEnabled(false);
+        mainTextArea.setCodeFoldingEnabled(false);
+        /**
+         * Adding a checkbox for the user to choose if they want the syntax Highlighter in
+         * their text or not.
+         * The File extension is taken from the open method in FileManager.java by a static
+         * variable called extension which is then called here.
+         */
+        checkBox.addItemListener(e -> {
+            fileManager.setCodeFormatting(checkBox.isSelected());
+            fileManager.updateCodeFormatting();
+        });
 
         //Adding menu Items to menu
         fileMenu.add(newItem);
@@ -120,21 +121,14 @@ public class MainGuiClass extends JFrame{
 
         //Set fontSizeSpinner preferred size from Config.yml File
         fontSizeSpinner.setPreferredSize(new Dimension(50, 25));
-        fontSizeSpinner.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                mainTextArea.setFont(new Font(mainTextArea.getFont()
-                        .getFamily(), Font.PLAIN,(int) fontSizeSpinner.getValue()));
-            }
-        });
+        fontSizeSpinner.addChangeListener(e -> mainTextArea.setFont(new Font(mainTextArea.getFont()
+                .getFamily(), Font.PLAIN,(int) fontSizeSpinner.getValue())));
         fontSizeSpinner.setValue(configManager.getConfigProperty("font_size"));
 
         //Set JTextArea font family from ConfigManager
         Font font = new Font((String) configManager.getConfigProperty("font_family"), Font.BOLD,
                 (Integer) configManager.getConfigProperty("font_size"));
         mainTextArea.setFont(font);
-
-
 
         //Adding ActionListeners to the Menu Items (lambda expression)
         newItem.addActionListener(e -> fileManager.newFile());
@@ -172,6 +166,7 @@ public class MainGuiClass extends JFrame{
         menuBar.add(searchTextField);
         menuBar.add(fontSizeSpinnerLabel);
         menuBar.add(fontSizeSpinner);
+        menuBar.add(checkBox);
         menuBar.add(dateAndTimeButton);
         menuBar.add(aboutButton);
         //Adding the menuPanel and the textPanel to the mainFrame

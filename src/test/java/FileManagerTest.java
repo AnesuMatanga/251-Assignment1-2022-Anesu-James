@@ -1,4 +1,5 @@
 import net.sf.saxon.style.SaxonImportQuery;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ public class FileManagerTest {
     @Test
     public void save() {
         String textFileContents = "This is what the text file contains\nand this is on the other line";
-        JTextArea textComponent = new JTextArea(textFileContents);
+        RSyntaxTextArea textComponent = new RSyntaxTextArea(textFileContents);
         FileManager manager = new FileManager(textComponent);
         manager.setCurrentFilePath("saveTest.txt");
         manager.save();
@@ -27,7 +28,7 @@ public class FileManagerTest {
 
     @Test
     public void open() {
-        JTextArea textComponent = new JTextArea();
+        RSyntaxTextArea textComponent = new RSyntaxTextArea();
         FileManager manager = new FileManager(textComponent);
         String testTxt = "This is a test";
         String fileName = "openTest.txt";
@@ -46,7 +47,7 @@ public class FileManagerTest {
 
     @Test
     public void newFile() {
-        JTextArea textComponent = new JTextArea("This text area has some text");
+        RSyntaxTextArea textComponent = new RSyntaxTextArea("This text area has some text");
         FileManager manager = new FileManager(textComponent);
         manager.newFile();
         assertEquals("", textComponent.getText());
@@ -54,7 +55,7 @@ public class FileManagerTest {
 
     @Test
     public void changeSavedState() {
-        JTextArea textComponent = new JTextArea("This text area has some text");
+        RSyntaxTextArea textComponent = new RSyntaxTextArea("This text area has some text");
         FileManager manager = new FileManager(textComponent);
         String fileName = "changeSavedStateTest.txt";
         manager.setCurrentFilePath(fileName);
@@ -74,7 +75,7 @@ public class FileManagerTest {
 
     @Test
     public void setTitle() {
-        JTextArea textComponent = new JTextArea("This text area has some text");
+        RSyntaxTextArea textComponent = new RSyntaxTextArea("This text area has some text");
         FileManager manager = new FileManager(textComponent);
         String fileName = "setTitleTest";
         manager.setCurrentFilePath(fileName);
