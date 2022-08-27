@@ -4,6 +4,8 @@ import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import org.apache.commons.io.FilenameUtils;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -14,6 +16,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.rtf.RTFEditorKit;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.print.PrinterException;
@@ -26,7 +29,9 @@ public class FileManager {
     //Text component that will be saved from and written to.
     private final JTextComponent textComponent;
     private final TextAreaListener textAreaListener;
-    public static String extension="";
+
+    private boolean codeFormatting = false;
+
 
     /**
      * Constructor to load the field
@@ -89,6 +94,7 @@ public class FileManager {
             e.printStackTrace();
             JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong when saving to " + currentFilePath);
         }
+        updateCodeFormatting();
     }
 
     /**
@@ -122,7 +128,6 @@ public class FileManager {
             fileToOpen = new File(currentFilePath);
         }
         try {
-            extension = FilenameUtils.getExtension(fileToOpen.getAbsolutePath());
             //Switch statement used as more file types will be added later
             switch (FilenameUtils.getExtension(fileToOpen.getAbsolutePath())) {
                 case "odt":
@@ -161,6 +166,7 @@ public class FileManager {
             e.printStackTrace();
             JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong when opening " + currentFilePath);
         }
+        updateCodeFormatting();
     }
 
     public void open() {
@@ -371,5 +377,67 @@ public class FileManager {
 
     public Boolean getIsSaved() {
         return this.isSaved;
+    }
+
+    public String getExtension() {
+        if (currentFilePath == null) return "";
+        else return FilenameUtils.getExtension(currentFilePath);
+    }
+
+    public void setCodeFormatting(boolean codeFormatting) {
+        this.codeFormatting = codeFormatting;
+    }
+
+    public void updateCodeFormatting() {
+        RSyntaxTextArea textArea = (RSyntaxTextArea) textComponent;
+        if (codeFormatting) {
+            String syntax;
+            switch (getExtension()) {
+                case "cpp":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS;
+                    break;
+                case "java":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_JAVA;
+                    break;
+                case "css":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_CSS;
+                    break;
+                case "html":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_HTML;
+                    break;
+                case "xml":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_XML;
+                    break;
+                case "js":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT;
+                    break;
+                case "spl":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_SQL;
+                    break;
+                case "c":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_C;
+                    break;
+                case "py":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_PYTHON;
+                    break;
+                case "yml":
+                    syntax = SyntaxConstants.SYNTAX_STYLE_YAML;
+                    break;
+                default:
+                    syntax = SyntaxConstants.SYNTAX_STYLE_NONE;
+            }
+                textArea.setSyntaxEditingStyle(syntax);
+                if (syntax.equals(SyntaxConstants.SYNTAX_STYLE_NONE)) {
+                    textArea.setAutoIndentEnabled(false);
+                    textArea.setCodeFoldingEnabled(false);
+                } else {
+                    textArea.setAutoIndentEnabled(true);
+                    textArea.setCodeFoldingEnabled(true);
+                }
+            } else {
+                textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
+                textArea.setAutoIndentEnabled(false);
+                textArea.setCodeFoldingEnabled(false);
+        }
     }
 }
