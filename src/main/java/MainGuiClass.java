@@ -10,9 +10,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.logging.*;
 
 
@@ -33,6 +31,7 @@ public class MainGuiClass extends JFrame{
     static JButton aboutButton;
     static JTextField searchTextField;
     static JLabel searchBoxLabel;
+    static JCheckBox checkBox;
 
 
     private FileManager fileManager;
@@ -79,6 +78,7 @@ public class MainGuiClass extends JFrame{
         copyEditItem = new JMenuItem("Copy");
         pasteEditItem = new JMenuItem("Paste");
         deleteEditItem = new JMenuItem("Delete");
+        checkBox = new JCheckBox("Highlighter");
 
         dateAndTimeButton = new JButton("Add Date & Time");
         aboutButton = new JButton("About");
@@ -92,7 +92,8 @@ public class MainGuiClass extends JFrame{
         configManager = new ConfigManager();
 
         //Adding SyntaxConstants (RSyntaxTextArea JAR) to the mainTextArea for highlighting different languages
-        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+        //checkBox.setSelected(true);
+      /*  mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
@@ -102,7 +103,58 @@ public class MainGuiClass extends JFrame{
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
         mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
-        mainTextArea.setCodeFoldingEnabled(true);
+        mainTextArea.setCodeFoldingEnabled(true); */
+
+        /**
+         * Adding a checkbox for the user to choose if they want the syntax Highlighter in
+         * their text or not.
+         * The File extension is taken from the open method in FileManager.java by a static
+         * variable called extension which is then called here.
+         */
+        checkBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == 1 && checkBox.isSelected()) {
+                    //DEBUG
+                    //System.out.println("Outside");
+                    if(FileManager.extension.equals("cpp")) {
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
+                    }
+                    if (FileManager.extension.equals("java")) {
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+                    }
+                    if(FileManager.extension.equals("css")) {
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
+                    }
+                    if (FileManager.extension.equals("html")) {
+                        //DEBUG
+                        System.out.println("html");
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
+                    }
+                    if(FileManager.extension.equals("xml")) {
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+                    }
+                    if (FileManager.extension.equals("js")) {
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
+                    }
+                    if(FileManager.extension.equals("sql")) {
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
+                    }
+                    if (FileManager.extension.equals("c")) {
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
+                    }
+                    if(FileManager.extension.equals("py")) {
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
+                    }
+                    if (FileManager.extension.equals("yml")) {
+                        mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
+                    }
+                }
+                else {
+                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
+                }
+            }
+        });
 
         //Adding menu Items to menu
         fileMenu.add(newItem);
@@ -133,8 +185,6 @@ public class MainGuiClass extends JFrame{
         Font font = new Font((String) configManager.getConfigProperty("font_family"), Font.BOLD,
                 (Integer) configManager.getConfigProperty("font_size"));
         mainTextArea.setFont(font);
-
-
 
         //Adding ActionListeners to the Menu Items (lambda expression)
         newItem.addActionListener(e -> fileManager.newFile());
@@ -172,6 +222,7 @@ public class MainGuiClass extends JFrame{
         menuBar.add(searchTextField);
         menuBar.add(fontSizeSpinnerLabel);
         menuBar.add(fontSizeSpinner);
+        menuBar.add(checkBox);
         menuBar.add(dateAndTimeButton);
         menuBar.add(aboutButton);
         //Adding the menuPanel and the textPanel to the mainFrame
