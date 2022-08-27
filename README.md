@@ -1,5 +1,5 @@
 # Text editor
-Made by Anesu Matanga (______) and James Thompson (21011195)
+Made by Anesu Matanga (20010613) and James Thompson (21011195)
 
 
 ## About text editor
@@ -24,12 +24,12 @@ In general James has been responsible for FileManager and EditorManager. While A
 
 Here are some commit IDs to try demonstrate this however as progress in these areas were made over time single commits arent represntive of full work done.
 Anesu
- - ConfigManager - ________
- - SearchBoxManager - _______
- - SearchBoxManager - ________  
+ - ConfigManager - 38f3c64e984a7cd061ca21bfbbcf61140eab5cc4
+ - SearchBoxManager - 5f66b2cc4d212c01309524bf8c34fafd841bb08e
+ - MainGuiClass - 53da76e459b72e454d5bc73acb2b10d85a72cc00
 James
- - FileManager - _______
- - EditorManager - _______
+ - FileManager - 9245254faeb38bd0bdff46345d943ee552d3700c
+ - EditorManager - cee8bfa017947892a1f1781bfa277fa8499bf588
 
 ## Commit messages types
 The commits in the repo should somewhat follow this format to help make the log readable
