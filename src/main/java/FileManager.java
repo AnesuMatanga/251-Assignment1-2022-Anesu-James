@@ -16,7 +16,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.rtf.RTFEditorKit;
 import java.awt.*;
-import java.awt.event.ItemEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.print.PrinterException;
@@ -37,7 +36,7 @@ public class FileManager {
      * Constructor to load the field
      * @param textComponent The component where files will be saved and written to
      */
-    public FileManager(JTextComponent textComponent) {
+    public FileManager(RSyntaxTextArea textComponent) {
         this.textComponent = textComponent;
         this.textAreaListener = new TextAreaListener();
         this.textComponent.getDocument().addDocumentListener(this.getTextAreaListener());
