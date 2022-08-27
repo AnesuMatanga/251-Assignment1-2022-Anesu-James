@@ -53,7 +53,7 @@ public class FileManager {
 
     /**
      * Save method will take contents from JTextComponent and save it to the currentFilePath.
-     * It is private and can only be accessed by the save and saveas Methods.
+     * It is private and can only be accessed by the save and save as Methods.
      */
     private void save(Boolean saveAs) {
         File fileToSave;

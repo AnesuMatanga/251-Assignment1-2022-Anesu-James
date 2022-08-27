@@ -7,6 +7,37 @@
     <groupId>nz.ac.massey.cs.assignment1</groupId>
     <artifactId>251-Assignment1-2022-Anesu-James</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.18.0</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <skip>false</skip>
+                    <failOnViolation>false</failOnViolation>
+                    <failurePriority>4</failurePriority>
+                    <verbose>true</verbose>
+                    <outputDirectory>${basedir}/reports/pmd</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>cpd-check</id>
+                        <goals>
+                            <goal>cpd-check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

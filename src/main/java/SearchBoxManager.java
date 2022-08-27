@@ -68,14 +68,11 @@ public class SearchBoxManager implements DocumentListener, ActionListener {
      * a match
      */
     private void keepSearching() {
-        if(matchWord != null){
-            if(matchWord.find()) {
-
-                //moveDot and setDot to select the matched word
-                content.getCaret().setDot(matchWord.start());
-                content.getCaret().moveDot(matchWord.end());
-                content.getCaret().setSelectionVisible(true);
-            }
+        if (matchWord != null && matchWord.find()) {
+            //moveDot and setDot to select the matched word
+            content.getCaret().setDot(matchWord.start());
+            content.getCaret().moveDot(matchWord.end());
+            content.getCaret().setSelectionVisible(true);
         }
     }
 
