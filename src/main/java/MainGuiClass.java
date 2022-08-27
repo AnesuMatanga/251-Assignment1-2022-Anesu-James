@@ -101,49 +101,8 @@ public class MainGuiClass extends JFrame{
          * variable called extension which is then called here.
          */
         checkBox.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED && checkBox.isSelected()) {
-                //DEBUG
-                //System.out.println("Outside");
-                if(fileManager.getExtension().equals("cpp")) {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS);
-                }
-                if (fileManager.getExtension().equals("java")) {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-                }
-                if(fileManager.getExtension().equals("css")) {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
-                }
-                if (fileManager.getExtension().equals("html")) {
-                    //DEBUG
-                    System.out.println("html");
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
-                }
-                if(fileManager.getExtension().equals("xml")) {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
-                }
-                if (fileManager.getExtension().equals("js")) {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
-                }
-                if(fileManager.getExtension().equals("sql")) {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
-                }
-                if (fileManager.getExtension().equals("c")) {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
-                }
-                if(fileManager.getExtension().equals("py")) {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
-                }
-                if (fileManager.getExtension().equals("yml")) {
-                    mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_YAML);
-                }
-                mainTextArea.setAutoIndentEnabled(true);
-                mainTextArea.setCodeFoldingEnabled(true);
-            }
-            else {
-                mainTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
-                mainTextArea.setAutoIndentEnabled(false);
-                mainTextArea.setCodeFoldingEnabled(false);
-            }
+            fileManager.setCodeFormatting(checkBox.isSelected());
+            fileManager.updateCodeFormatting();
         });
 
         //Adding menu Items to menu
