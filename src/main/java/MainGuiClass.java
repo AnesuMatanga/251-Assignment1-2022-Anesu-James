@@ -4,14 +4,10 @@
  */
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ItemEvent;
 import java.awt.event.WindowEvent;
 
 
@@ -35,10 +31,10 @@ public class MainGuiClass extends JFrame{
     static JCheckBox checkBox;
 
 
-    private FileManager fileManager;
-    private EditorManager editorManager;
-    private SearchBoxManager searchBoxManager;
-    private ConfigManager configManager;
+    private final  FileManager fileManager;
+    private final EditorManager editorManager;
+    private final SearchBoxManager searchBoxManager;
+    private final ConfigManager configManager;
 
 
     //Constructor
@@ -94,12 +90,8 @@ public class MainGuiClass extends JFrame{
 
         mainTextArea.setAutoIndentEnabled(false);
         mainTextArea.setCodeFoldingEnabled(false);
-        /**
-         * Adding a checkbox for the user to choose if they want the syntax Highlighter in
-         * their text or not.
-         * The File extension is taken from the open method in FileManager.java by a static
-         * variable called extension which is then called here.
-         */
+
+        //Check box that either enables or disables code formatting, which includes syntax highlighting and such.
         checkBox.addItemListener(e -> {
             fileManager.setCodeFormatting(checkBox.isSelected());
             fileManager.updateCodeFormatting();
@@ -148,12 +140,8 @@ public class MainGuiClass extends JFrame{
         //Adding ActionListener to date and time button
         dateAndTimeButton.addActionListener(e -> editorManager.addDateAndTime());
 
-        aboutButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
-                    "Made by Anesu and James for assignment 1 of 159251 Semester 2 2022.\n" +
-                    "Search feature: Just start typing and it will search the current document for that text." +
-                    " Pressing Enter will cycle through the found occurrences of the search string.\n");
-        });
+        aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
+                "Made by Anesu and James for assignment 1 of 159251 Semester 2 2022."));
 
         //Adding DocumentListener and ActionListener to JTextField
         searchTextField.getDocument().addDocumentListener(searchBoxManager);
