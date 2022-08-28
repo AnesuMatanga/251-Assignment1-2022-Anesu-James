@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Has the methods that listen to the search box and highlights the words in the text area.
+ */
 public class SearchBoxManager implements DocumentListener, ActionListener {
     //Variables Initialising
     protected JTextComponent content;

@@ -15,6 +15,7 @@
                 <version>3.18.0</version>
                 <inherited>true</inherited>
                 <configuration>
+                    <!-- Using the default rule set as that is what was interpreted by basic java rules.-->
                     <skip>false</skip>
                     <failOnViolation>false</failOnViolation>
                     <failurePriority>4</failurePriority>

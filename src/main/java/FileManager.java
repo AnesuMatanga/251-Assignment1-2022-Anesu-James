@@ -65,30 +65,25 @@ public class FileManager {
         } else {
             fileToSave = new File(currentFilePath);
         }
-        //Switch statement used as more file types will be added in the future. This could later change into
-        //a save class or something, but currently it is left as is.
+
         try {
-            switch (FilenameUtils.getExtension(fileToSave.getAbsolutePath())) {
-                //This case is to Try and open pdf extension files
-                case "pdf":
-                        Document doc = new Document();
-                        PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(fileToSave));
-                        Font font = new Font(Font.HELVETICA, 11, Font.NORMAL, Color.BLACK);
-                        doc.open();
-                        if (!textComponent.getText().equals("")) {
-                            Paragraph para = new Paragraph(textComponent.getText(), font);
-                            doc.add(para);
-                        }
-                        doc.close();
-                        writer.close();
-                    break;
-                default: //Assuming file is txt format
-                    currentFilePath = fileToSave.getAbsolutePath();
-                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileToSave));
-                    textComponent.write(bufferedWriter);
-                    bufferedWriter.close();
-                    changeSavedSate(true);
-                    break;
+            if ("pdf".equals(FilenameUtils.getExtension(fileToSave.getAbsolutePath()))) {
+                Document doc = new Document();
+                PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(fileToSave));
+                Font font = new Font(Font.HELVETICA, 11, Font.NORMAL, Color.BLACK);
+                doc.open();
+                if (!textComponent.getText().equals("")) {
+                    Paragraph para = new Paragraph(textComponent.getText(), font);
+                    doc.add(para);
+                }
+                doc.close();
+                writer.close();
+            } else { //Assuming file is txt format
+                currentFilePath = fileToSave.getAbsolutePath();
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileToSave));
+                textComponent.write(bufferedWriter);
+                bufferedWriter.close();
+                changeSavedSate(true);
             }
         } catch (DocumentException | IOException e ) {
             e.printStackTrace();

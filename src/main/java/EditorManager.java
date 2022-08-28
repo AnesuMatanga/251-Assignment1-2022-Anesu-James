@@ -1,7 +1,10 @@
 import javax.swing.text.JTextComponent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * handles the editing of text within the mainTextArea. Due to the text area having so many built in feature it is
+ * a small and simple class.
+ */
 public class EditorManager {
     private final JTextComponent textComponent;
 
