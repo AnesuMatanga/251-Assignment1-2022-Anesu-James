@@ -18,6 +18,7 @@ import javax.swing.text.rtf.RTFEditorKit;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.print.PrinterAbortException;
 import java.awt.print.PrinterException;
 import java.io.*;
 
@@ -192,9 +193,10 @@ public class FileManager {
     public void print() {
         try {
             textComponent.print();
+        } catch (PrinterAbortException ignored) {
         } catch (PrinterException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(textComponent, "Error:\n Something went wrong with printing");
+            JOptionPane.showMessageDialog(textComponent, "Error:\nSomething went wrong with printing");
         }
     }
 
