@@ -69,6 +69,7 @@ public class FileManager {
         //a save class or something, but currently it is left as is.
         try {
             switch (FilenameUtils.getExtension(fileToSave.getAbsolutePath())) {
+                //This case is to Try and open pdf extension files
                 case "pdf":
                         Document doc = new Document();
                         PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(fileToSave));
@@ -129,6 +130,7 @@ public class FileManager {
         try {
             //Switch statement used as more file types will be added later
             switch (FilenameUtils.getExtension(fileToOpen.getAbsolutePath())) {
+                //This case is to Try and open odt extension files
                 case "odt":
                     OdfTextDocument odt = OdfTextDocument.loadDocument(fileToOpen);
                     StringBuilder textFromODT = new StringBuilder();
@@ -142,10 +144,12 @@ public class FileManager {
                     }
                     textComponent.setText(textFromODT.toString());
                     break;
+                //This case is to Try and open pdf extension files
                 case "pdf":
                     JOptionPane.showMessageDialog(textComponent, "Sorry Reading from PDFs is not yet" +
                             " implemented, hopefully will be in the future");
                     break;
+                //This case is to Try and open rtf extension files
                 case "rtf":
                     RTFEditorKit rtfParser = new RTFEditorKit();
                     javax.swing.text.Document document = rtfParser.createDefaultDocument();
@@ -168,6 +172,7 @@ public class FileManager {
         updateCodeFormatting();
     }
 
+    //public method to call open method
     public void open() {
         this.open(false);
     }
@@ -198,13 +203,27 @@ public class FileManager {
         }
     }
 
+    /**
+     * Method to get the file path of the current file
+     *
+     * @return currentFilePath
+     */
     public String getCurrentFilePath() {
         return currentFilePath;
     }
+
+    /**
+     * Method to set the current File Path
+     */
     public void setCurrentFilePath(String currentFilePath) {
         this.currentFilePath = currentFilePath;
     }
 
+    /**
+     * Change the saved state of the current open file
+     *
+     * @param newSavedState
+     */
     private void changeSavedSate(Boolean newSavedState) {
         isSaved = newSavedState;
         String newTitle = currentFilePath == null ? "untitled" : new File(currentFilePath).getName();
@@ -215,6 +234,11 @@ public class FileManager {
         }
     }
 
+    /**
+     * Set the title  of the current file open on top of the textArea
+     *
+     * @param title
+     */
     private void setTitle(String title) {
         textComponent.setBorder(BorderFactory.createTitledBorder(title));
     }
@@ -370,27 +394,53 @@ public class FileManager {
         }
     }
 
+    /**
+     *  Get textAreaListener
+     */
     public TextAreaListener getTextAreaListener() {
         return textAreaListener;
     }
 
+    /**
+     * Return True or false to indicate the save status
+     *
+     * @return boolean (T/F)
+     */
     public Boolean getIsSaved() {
         return this.isSaved;
     }
 
+    /**
+     * Get current file extension and return null if there is no file
+     * else return extension
+     *
+     * @return fileExtension
+     */
     public String getExtension() {
         if (currentFilePath == null) return "";
         else return FilenameUtils.getExtension(currentFilePath);
     }
 
+    /**
+     * Set the Code formatting (True or False)
+     *
+     * @param codeFormatting
+     */
     public void setCodeFormatting(boolean codeFormatting) {
         this.codeFormatting = codeFormatting;
     }
 
+    /**
+     * Update the code formatting in the textArea, If true then get
+     * file extension and Syntax Highlight the text else remove
+     * syntax highlighting, auto indent and code folding
+     *
+     */
     public void updateCodeFormatting() {
         RSyntaxTextArea textArea = (RSyntaxTextArea) textComponent;
         if (codeFormatting) {
             String syntax;
+            //Switch case for different programming language and syntax highlighting styles
             switch (getExtension()) {
                 case "cpp":
                     syntax = SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS;
