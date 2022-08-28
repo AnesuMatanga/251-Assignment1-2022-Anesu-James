@@ -1,11 +1,13 @@
 import org.yaml.snakeyaml.Yaml;
-
 import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
 
+/**
+ * Class to read the config file used for this program
+ */
 public class ConfigManager {
     //Method to get properties set in the Config.yml file such as Font properties using snakeyml
 
