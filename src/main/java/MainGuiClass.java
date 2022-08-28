@@ -4,12 +4,9 @@
  */
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
 import java.awt.event.WindowEvent;
 
 
@@ -33,7 +30,7 @@ public class MainGuiClass extends JFrame{
     static JCheckBox checkBox;
 
 
-    private final FileManager fileManager;
+    private final  FileManager fileManager;
     private final EditorManager editorManager;
     private final SearchBoxManager searchBoxManager;
     private final ConfigManager configManager;
@@ -78,26 +75,23 @@ public class MainGuiClass extends JFrame{
         pasteEditItem = new JMenuItem("Paste");
         deleteEditItem = new JMenuItem("Delete");
         checkBox = new JCheckBox("Highlighter");
-
         dateAndTimeButton = new JButton("Add Date & Time");
         aboutButton = new JButton("About");
         searchTextField = new JTextField();
         searchBoxLabel = new JLabel("Search:");
         scrollPane = new RTextScrollPane(mainTextArea);
 
+        //Manager class initialization
         fileManager = new FileManager(mainTextArea);
         editorManager = new EditorManager(mainTextArea);
         searchBoxManager = new SearchBoxManager(mainTextArea);
         configManager = new ConfigManager();
 
+        //Setting the default text formatting to be nothing.
         mainTextArea.setAutoIndentEnabled(false);
         mainTextArea.setCodeFoldingEnabled(false);
-        /**
-         * Adding a checkbox for the user to choose if they want the syntax Highlighter in
-         * their text or not.
-         * The File extension is taken from the open method in FileManager.java by a static
-         * variable called extension which is then called here.
-         */
+
+        //Check box that either enables or disables code formatting, which includes syntax highlighting and such.
         checkBox.addItemListener(e -> {
             fileManager.setCodeFormatting(checkBox.isSelected());
             fileManager.updateCodeFormatting();
@@ -146,6 +140,7 @@ public class MainGuiClass extends JFrame{
         //Adding ActionListener to date and time button
         dateAndTimeButton.addActionListener(e -> editorManager.addDateAndTime());
 
+        //About button to display popup message information about our text editor.
         aboutButton.addActionListener(e -> JOptionPane.showMessageDialog(mainFrame, "Welcome to our text editor!\n" +
                 "Made by Anesu and James for assignment 1 of 159251 Semester 2 2022."));
 
@@ -163,12 +158,16 @@ public class MainGuiClass extends JFrame{
         menuBar.add(checkBox);
         menuBar.add(dateAndTimeButton);
         menuBar.add(aboutButton);
+
         //Adding the menuPanel and the textPanel to the mainFrame
         mainFrame.setJMenuBar(menuBar);
         mainFrame.add(scrollPane);
+
+        //Sets the fileManager frame to be the window ancestor of the RSyntaxTextArea it was given.
         fileManager.setFrame();
+
+        //Frame settings and creation
         mainFrame.setSize(600, 600);
-        //mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         mainFrame.setVisible(true);
     }
